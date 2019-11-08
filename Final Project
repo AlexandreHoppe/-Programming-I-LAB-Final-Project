@@ -1,0 +1,2437 @@
+//Alexandre Hoppe
+//Programming Lab
+//09/07/2017
+
+
+#include <stdio.h>
+#include <conio.h>
+#include <stdlib.h>
+#include <windows.h>
+
+void newAccount();
+void cashDeposit();
+void cashDraw();
+void fundTransfer();
+void openingScreen();
+void accountInfo();
+void transInfo();
+void logoBranding();
+int closeProgram();
+int screenMenu();
+int blockAccount(); //EXTRA FEATURE, type 7 on the menu to process it.
+int blockedAccount();
+int closingScreen();
+
+int main(void)
+{
+	float cashBalance;
+	float cashdeposit;
+	float cashWithdraw;
+
+	openingScreen();
+	logoBranding();
+	screenMenu();
+
+	printf("\n");
+	return 0; //indicade the success of the program
+}
+
+int screenMenu()
+{
+	int numMenu;
+
+	system("cls");
+	printf("1. Create New Account \n"); // output menu
+	printf("2. Cash Deposit \n");
+	printf("3. Cash Withdrawal \n");
+	printf("4. Fund Transfer \n");
+	printf("5. Account Information \n");
+	printf("6. Transaction Information \n");
+	printf("7. Block Account.\n");
+	printf("8. Exit \n");
+	printf(" \n");
+	printf(" \n");
+	printf("Press a choice between the range [1-8] "); //ask a number
+	scanf_s("%d", &numMenu); //input the number
+	printf("\n");
+
+
+	switch (numMenu) {
+	case 1: //order for number 1
+		system("cls");
+		printf("This is where you would add an account \n");
+		newAccount();
+
+		break;
+
+	case 2: //order for number 2
+		system("cls");
+		printf("This is where you would deposit money to an account \n");
+		cashDeposit();
+		break;
+
+
+	case 3: //order for number 3
+		system("cls");
+		printf("This is where you would withdraw money \n");
+		cashDraw();
+		break;
+
+
+	case 4: //order for number 4
+		system("cls");
+		printf("Transfer funds from savings to checking. \n");
+		fundTransfer();
+		break;
+
+
+	case 5: //order for number 5
+		system("cls");
+		accountInfo();
+		screenMenu();
+		break;
+
+
+	case 6: //order for number 6
+		system("cls");
+		transInfo();
+		screenMenu();
+		break;
+
+	case 7: //order for number 7
+		system("cls");
+		blockAccount();
+		break;
+
+
+	case 8: //order for number 8
+		system("cls");
+		closeProgram();
+		break;
+
+	default: 	//order if the number isn't between 1 and 8
+		printf("\n");
+		printf("your input is out of range! Enter a choice between 1 to 8! \n");
+		system("pause");
+		system("cls");
+		screenMenu();
+		break;
+	}
+}
+
+void newAccount()
+{
+	char userName[25];
+	char userPass[25];
+
+	printf("Create your username: ");
+	scanf_s("%s", &userName);
+
+	printf("Create your password: ");
+	scanf_s("%s", &userPass);
+
+	printf("\n");
+	printf("Welcome %s ! Your password is %s\n\n ", userName, userPass);
+	printf("\n");
+
+	system("pause");
+	screenMenu();
+}
+
+void cashDeposit()
+{
+	float cashBalance;
+	float cashDeposit;
+
+	printf("\n");
+	printf("process a cash deposit \n");
+	printf("\n");
+	printf("Enter the current Account Balance \n");
+	printf("\n");
+
+	scanf_s("%f", &cashBalance);
+	printf("\n");
+
+	printf("Enter the amount of deposit \n");
+	printf("\n");
+
+	scanf_s("%f", &cashDeposit);
+	printf("\n");
+
+	cashBalance = cashBalance + cashDeposit;
+
+	printf("The new balance is; $ %.2f", cashBalance);
+	printf("\n");
+	system("pause");
+	screenMenu();
+}
+
+void cashDraw()
+{
+	float cashBalance;
+	float cashWithdraw;
+
+	printf("\n");
+	printf("process a cash withdraw \n");
+	printf("\n");
+	printf("Enter the current Account Balance \n");
+	printf("\n");
+
+	scanf_s("%f", &cashBalance);
+	printf("\n");
+
+	printf("Enter the amount to be withdraw \n");
+	printf("\n");
+
+	scanf_s("%f", &cashWithdraw);
+	printf("\n");
+
+	cashBalance = cashBalance - cashWithdraw;
+
+	if (cashBalance < 0) {
+		printf("You don't have enought money to do this withdraw");
+		printf("\n");
+		printf("\n");
+		cashDraw();
+	}
+	printf("The new balance is; $ %.2f", cashBalance);
+	printf("\n");
+	system("pause");
+	screenMenu();
+}
+
+void fundTransfer()
+{
+	float savAccount;
+	float checkAccount;
+	float transAccount;
+	float newSaving;
+	float newChecking;
+
+	printf("Enter the current Savings Account Balance \n");
+	scanf_s("%f", &savAccount);
+	printf("\n");
+
+	printf("Enter the current Checking Account Balance \n");
+	scanf_s("%f", &checkAccount);
+	printf("\n");
+
+	printf("Enter the amount to be transferred \n");
+	scanf_s("%f", &transAccount);
+
+	if (savAccount > transAccount) {
+		newSaving = savAccount - transAccount;
+		newChecking = checkAccount + transAccount;
+
+		printf("The new savings account balance is : $ %.2f\n", newSaving);
+		printf("The new checking account balance is: $ %.2f\n", newChecking);
+	}
+	else {
+		printf("You don't have enough money on your saving account. \n\n\n");
+		fundTransfer();
+	}
+	system("pause");
+	screenMenu();
+}
+
+void openingScreen()
+{
+	//Alexandre Hoppe
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <conio.h>
+
+	int x = 75;
+
+	system("COLOR 06 ");
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                           *        \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||     *           *                \n");
+	printf(" || *             ||      || *   || ||   *  ||                                 \n");
+	printf(" ||     *         ||    * ||     || ||*     ||          *        *         *   \n");
+	printf(" ||_________   *  ||      ||_____|| ||_____||     *                   *        \n");
+	printf(" |_________ |     ||  *   ||_____|| ||_____||              *                   \n");
+	printf("           ||     ||      ||  *  || ||      || *                        *      \n");
+	printf("     *     || *   ||      ||     || ||  *   ||      *          *            *  \n");
+	printf(" *         ||     ||   *  ||     || ||    * ||                          *      \n");
+	printf("  _________||     ||  *   ||     || ||  *   ||       *      *                  \n");
+	printf(" |__________|     ||      ||     || ||      ||   *      *                      \n");
+	printf("                                                                  *       *    \n");
+	printf("                 *                    ____       _______   ___                 \n");
+	printf("     *                     *        ||   *||    | _____ | | _ | || ||   //     \n");
+	printf("            *         *          *  ||*   ||    || *   || || ||*|| ||* //      \n");
+	printf("  *   *                      *      ||____||__  ||     || || || || ||_//       \n");
+	printf("                        *   *       ||_______|| ||_____|| ||*|| ||*| _ |     * \n");
+	printf("         *                          ||       || ||_____|| || || || || ||       \n");
+	printf("     *         *                    ||    *  || ||     || || || || ||*||       \n");
+	printf("          *                   *     || *     || ||  *  || || ||*|| || ||  *    \n");
+	printf("                  *       *     *   ||_______|| ||    *|| || ||_|| || ||       \n");
+	printf("   *                                ||_______|| ||*    || || |___| || ||  *    \n");
+
+	Sleep(x);
+
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                                    \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||                                  \n");
+	printf(" ||               ||      ||     || ||      ||                                 \n");
+	printf(" ||               ||      ||     || ||      ||                                 \n");
+	printf(" ||_________      ||      ||_____|| ||_____||                                  \n");
+	printf(" |_________ |     ||      ||_____|| ||_____||                                  \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("  _________||     ||      ||     || ||      ||                                 \n");
+	printf(" |__________|     ||      ||     || ||      ||                                 \n");
+	printf("                                                                               \n");
+	printf("                                      ____       _______   ___                 \n");
+	printf("                                    ||    ||    | _____ | | _ | || ||   //     \n");
+	printf("                                    ||    ||    ||     || || || || ||  //      \n");
+	printf("                                    ||____||__  ||     || || || || ||_//       \n");
+	printf("                                    ||_______|| ||_____|| || || || | _ |       \n");
+	printf("                                    ||       || ||_____|| || || || || ||       \n");
+	printf("                                    ||       || ||     || || || || || ||       \n");
+	printf("                                    ||       || ||     || || || || || ||       \n");
+	printf("                                    ||_______|| ||     || || ||_|| || ||       \n");
+	printf("                                    ||_______|| ||     || || |___| || ||       \n");
+
+	Sleep(x);
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                           *        \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||     *           *                \n");
+	printf(" || *             ||      || *   || ||   *  ||                                 \n");
+	printf(" ||     *         ||    * ||     || ||*     ||          *        *         *   \n");
+	printf(" ||_________   *  ||      ||_____|| ||_____||     *                   *        \n");
+	printf(" |_________ |     ||  *   ||_____|| ||_____||              *                   \n");
+	printf("           ||     ||      ||  *  || ||      || *                        *      \n");
+	printf("     *     || *   ||      ||     || ||  *   ||      *          *            *  \n");
+	printf(" *         ||     ||   *  ||     || ||    * ||                          *      \n");
+	printf("  _________||     ||  *   ||     || ||  *   ||       *      *                  \n");
+	printf(" |__________|     ||      ||     || ||      ||   *      *                      \n");
+	printf("                                                                  *       *    \n");
+	printf("                 *                    ____       _______   ___                 \n");
+	printf("     *                     *        ||   *||    | _____ | | _ | || ||   //     \n");
+	printf("            *         *          *  ||*   ||    || *   || || ||*|| ||* //      \n");
+	printf("  *   *                      *      ||____||__  ||     || || || || ||_//       \n");
+	printf("                        *   *       ||_______|| ||_____|| ||*|| ||*| _ |     * \n");
+	printf("         *                          ||       || ||_____|| || || || || ||       \n");
+	printf("     *         *                    ||    *  || ||     || || || || ||*||       \n");
+	printf("          *                   *     || *     || ||  *  || || ||*|| || ||  *    \n");
+	printf("                  *       *     *   ||_______|| ||    *|| || ||_|| || ||       \n");
+	printf("   *                                ||_______|| ||*    || || |___| || ||  *    \n");
+
+	Sleep(x);
+
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                                    \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||                                  \n");
+	printf(" ||               ||      ||     || ||      ||                                 \n");
+	printf(" ||               ||      ||     || ||      ||                                 \n");
+	printf(" ||_________      ||      ||_____|| ||_____||                                  \n");
+	printf(" |_________ |     ||      ||_____|| ||_____||                                  \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("  _________||     ||      ||     || ||      ||                                 \n");
+	printf(" |__________|     ||      ||     || ||      ||                                 \n");
+	printf("                                                                               \n");
+	printf("                                      ____       _______   ___                 \n");
+	printf("                                    ||    ||    | _____ | | _ | || ||   //     \n");
+	printf("                                    ||    ||    ||     || || || || ||  //      \n");
+	printf("                                    ||____||__  ||     || || || || ||_//       \n");
+	printf("                                    ||_______|| ||_____|| || || || | _ |       \n");
+	printf("                                    ||       || ||_____|| || || || || ||       \n");
+	printf("                                    ||       || ||     || || || || || ||       \n");
+	printf("                                    ||       || ||     || || || || || ||       \n");
+	printf("                                    ||_______|| ||     || || ||_|| || ||       \n");
+	printf("                                    ||_______|| ||     || || |___| || ||       \n");
+
+	Sleep(x);
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                           *        \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||     *           *                \n");
+	printf(" || *             ||      || *   || ||   *  ||                                 \n");
+	printf(" ||     *         ||    * ||     || ||*     ||          *        *         *   \n");
+	printf(" ||_________   *  ||      ||_____|| ||_____||     *                   *        \n");
+	printf(" |_________ |     ||  *   ||_____|| ||_____||              *                   \n");
+	printf("           ||     ||      ||  *  || ||      || *                        *      \n");
+	printf("     *     || *   ||      ||     || ||  *   ||      *          *            *  \n");
+	printf(" *         ||     ||   *  ||     || ||    * ||                          *      \n");
+	printf("  _________||     ||  *   ||     || ||  *   ||       *      *                  \n");
+	printf(" |__________|     ||      ||     || ||      ||   *      *                      \n");
+	printf("                                                                  *       *    \n");
+	printf("                 *                    ____       _______   ___                 \n");
+	printf("     *                     *        ||   *||    | _____ | | _ | || ||   //     \n");
+	printf("            *         *          *  ||*   ||    || *   || || ||*|| ||* //      \n");
+	printf("  *   *                      *      ||____||__  ||     || || || || ||_//       \n");
+	printf("                        *   *       ||_______|| ||_____|| ||*|| ||*| _ |     * \n");
+	printf("         *                          ||       || ||_____|| || || || || ||       \n");
+	printf("     *         *                    ||    *  || ||     || || || || ||*||       \n");
+	printf("          *                   *     || *     || ||  *  || || ||*|| || ||  *    \n");
+	printf("                  *       *     *   ||_______|| ||    *|| || ||_|| || ||       \n");
+	printf("   *                                ||_______|| ||*    || || |___| || ||  *    \n");
+
+	Sleep(x);
+
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                                    \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||                                  \n");
+	printf(" ||               ||      ||     || ||      ||                                 \n");
+	printf(" ||               ||      ||     || ||      ||                                 \n");
+	printf(" ||_________      ||      ||_____|| ||_____||                                  \n");
+	printf(" |_________ |     ||      ||_____|| ||_____||                                  \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("  _________||     ||      ||     || ||      ||                                 \n");
+	printf(" |__________|     ||      ||     || ||      ||                                 \n");
+	printf("                                                                               \n");
+	printf("                                      ____       _______   ___                 \n");
+	printf("                                    ||    ||    | _____ | | _ | || ||   //     \n");
+	printf("                                    ||    ||    ||     || || || || ||  //      \n");
+	printf("                                    ||____||__  ||     || || || || ||_//       \n");
+	printf("                                    ||_______|| ||_____|| || || || | _ |       \n");
+	printf("                                    ||       || ||_____|| || || || || ||       \n");
+	printf("                                    ||       || ||     || || || || || ||       \n");
+	printf("                                    ||       || ||     || || || || || ||       \n");
+	printf("                                    ||_______|| ||     || || ||_|| || ||       \n");
+	printf("                                    ||_______|| ||     || || |___| || ||       \n");
+
+	Sleep(x);
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                           *        \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||     *           *                \n");
+	printf(" || *             ||      || *   || ||   *  ||                                 \n");
+	printf(" ||     *         ||    * ||     || ||*     ||          *        *         *   \n");
+	printf(" ||_________   *  ||      ||_____|| ||_____||     *                   *        \n");
+	printf(" |_________ |     ||  *   ||_____|| ||_____||              *                   \n");
+	printf("           ||     ||      ||  *  || ||      || *                        *      \n");
+	printf("     *     || *   ||      ||     || ||  *   ||      *          *            *  \n");
+	printf(" *         ||     ||   *  ||     || ||    * ||                          *      \n");
+	printf("  _________||     ||  *   ||     || ||  *   ||       *      *                  \n");
+	printf(" |__________|     ||      ||     || ||      ||   *      *                      \n");
+	printf("                                                                  *       *    \n");
+	printf("                 *                    ____       _______   ___                 \n");
+	printf("     *                     *        ||   *||    | _____ | | _ | || ||   //     \n");
+	printf("            *         *          *  ||*   ||    || *   || || ||*|| ||* //      \n");
+	printf("  *   *                      *      ||____||__  ||     || || || || ||_//       \n");
+	printf("                        *   *       ||_______|| ||_____|| ||*|| ||*| _ |     * \n");
+	printf("         *                          ||       || ||_____|| || || || || ||       \n");
+	printf("     *         *                    ||    *  || ||     || || || || ||*||       \n");
+	printf("          *                   *     || *     || ||  *  || || ||*|| || ||  *    \n");
+	printf("                  *       *     *   ||_______|| ||    *|| || ||_|| || ||       \n");
+	printf("   *                                ||_______|| ||*    || || |___| || ||  *    \n");
+
+	Sleep(x);
+
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                                    \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||                                  \n");
+	printf(" ||               ||      ||     || ||      ||                                 \n");
+	printf(" ||               ||      ||     || ||      ||                                 \n");
+	printf(" ||_________      ||      ||_____|| ||_____||                                  \n");
+	printf(" |_________ |     ||      ||_____|| ||_____||                                  \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("  _________||     ||      ||     || ||      ||                                 \n");
+	printf(" |__________|     ||      ||     || ||      ||                                 \n");
+	printf("                                                                               \n");
+	printf("                                      ____       _______   ___                 \n");
+	printf("                                    ||    ||    | _____ | | _ | || ||   //     \n");
+	printf("                                    ||    ||    ||     || || || || ||  //      \n");
+	printf("                                    ||____||__  ||     || || || || ||_//       \n");
+	printf("                                    ||_______|| ||_____|| || || || | _ |       \n");
+	printf("                                    ||       || ||_____|| || || || || ||       \n");
+	printf("                                    ||       || ||     || || || || || ||       \n");
+	printf("                                    ||       || ||     || || || || || ||       \n");
+	printf("                                    ||_______|| ||     || || ||_|| || ||       \n");
+	printf("                                    ||_______|| ||     || || |___| || ||       \n");
+
+	Sleep(x);
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                           *        \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||     *           *                \n");
+	printf(" || *             ||      || *   || ||   *  ||                                 \n");
+	printf(" ||     *         ||    * ||     || ||*     ||          *        *         *   \n");
+	printf(" ||_________   *  ||      ||_____|| ||_____||     *                   *        \n");
+	printf(" |_________ |     ||  *   ||_____|| ||_____||              *                   \n");
+	printf("           ||     ||      ||  *  || ||      || *                        *      \n");
+	printf("     *     || *   ||      ||     || ||  *   ||      *          *            *  \n");
+	printf(" *         ||     ||   *  ||     || ||    * ||                          *      \n");
+	printf("  _________||     ||  *   ||     || ||  *   ||       *      *                  \n");
+	printf(" |__________|     ||      ||     || ||      ||   *      *                      \n");
+	printf("                                                                  *       *    \n");
+	printf("                 *                    ____       _______   ___                 \n");
+	printf("     *                     *        ||   *||    | _____ | | _ | || ||   //     \n");
+	printf("            *         *          *  ||*   ||    || *   || || ||*|| ||* //      \n");
+	printf("  *   *                      *      ||____||__  ||     || || || || ||_//       \n");
+	printf("                        *   *       ||_______|| ||_____|| ||*|| ||*| _ |     * \n");
+	printf("         *                          ||       || ||_____|| || || || || ||       \n");
+	printf("     *         *                    ||    *  || ||     || || || || ||*||       \n");
+	printf("          *                   *     || *     || ||  *  || || ||*|| || ||  *    \n");
+	printf("                  *       *     *   ||_______|| ||    *|| || ||_|| || ||       \n");
+	printf("   *                                ||_______|| ||*    || || |___| || ||  *    \n");
+
+	Sleep(x);
+
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                                    \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||                                  \n");
+	printf(" ||               ||      ||     || ||      ||                                 \n");
+	printf(" ||               ||      ||     || ||      ||                                 \n");
+	printf(" ||_________      ||      ||_____|| ||_____||                                  \n");
+	printf(" |_________ |     ||      ||_____|| ||_____||                                  \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("  _________||     ||      ||     || ||      ||                                 \n");
+	printf(" |__________|     ||      ||     || ||      ||                                 \n");
+	printf("                                                                               \n");
+	printf("                                      ____       _______   ___                 \n");
+	printf("                                    ||    ||    | _____ | | _ | || ||   //     \n");
+	printf("                                    ||    ||    ||     || || || || ||  //      \n");
+	printf("                                    ||____||__  ||     || || || || ||_//       \n");
+	printf("                                    ||_______|| ||_____|| || || || | _ |       \n");
+	printf("                                    ||       || ||_____|| || || || || ||       \n");
+	printf("                                    ||       || ||     || || || || || ||       \n");
+	printf("                                    ||       || ||     || || || || || ||       \n");
+	printf("                                    ||_______|| ||     || || ||_|| || ||       \n");
+	printf("                                    ||_______|| ||     || || |___| || ||       \n");
+
+	Sleep(x);
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                           *        \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||     *           *                \n");
+	printf(" || *             ||      || *   || ||   *  ||                                 \n");
+	printf(" ||     *         ||    * ||     || ||*     ||          *        *         *   \n");
+	printf(" ||_________   *  ||      ||_____|| ||_____||     *                   *        \n");
+	printf(" |_________ |     ||  *   ||_____|| ||_____||              *                   \n");
+	printf("           ||     ||      ||  *  || ||      || *                        *      \n");
+	printf("     *     || *   ||      ||     || ||  *   ||      *          *            *  \n");
+	printf(" *         ||     ||   *  ||     || ||    * ||                          *      \n");
+	printf("  _________||     ||  *   ||     || ||  *   ||       *      *                  \n");
+	printf(" |__________|     ||      ||     || ||      ||   *      *                      \n");
+	printf("                                                                  *       *    \n");
+	printf("                 *                    ____       _______   ___                 \n");
+	printf("     *                     *        ||   *||    | _____ | | _ | || ||   //     \n");
+	printf("            *         *          *  ||*   ||    || *   || || ||*|| ||* //      \n");
+	printf("  *   *                      *      ||____||__  ||     || || || || ||_//       \n");
+	printf("                        *   *       ||_______|| ||_____|| ||*|| ||*| _ |     * \n");
+	printf("         *                          ||       || ||_____|| || || || || ||       \n");
+	printf("     *         *                    ||    *  || ||     || || || || ||*||       \n");
+	printf("          *                   *     || *     || ||  *  || || ||*|| || ||  *    \n");
+	printf("                  *       *     *   ||_______|| ||    *|| || ||_|| || ||       \n");
+	printf("   *                                ||_______|| ||*    || || |___| || ||  *    \n");
+
+	Sleep(x);
+
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                                    \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||                                  \n");
+	printf(" ||               ||      ||     || ||      ||                                 \n");
+	printf(" ||               ||      ||     || ||      ||                                 \n");
+	printf(" ||_________      ||      ||_____|| ||_____||                                  \n");
+	printf(" |_________ |     ||      ||_____|| ||_____||                                  \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("  _________||     ||      ||     || ||      ||                                 \n");
+	printf(" |__________|     ||      ||     || ||      ||                                 \n");
+	printf("                                                                               \n");
+	printf("                                      ____       _______   ___                 \n");
+	printf("                                    ||    ||    | _____ | | _ | || ||   //     \n");
+	printf("                                    ||    ||    ||     || || || || ||  //      \n");
+	printf("                                    ||____||__  ||     || || || || ||_//       \n");
+	printf("                                    ||_______|| ||_____|| || || || | _ |       \n");
+	printf("                                    ||       || ||_____|| || || || || ||       \n");
+	printf("                                    ||       || ||     || || || || || ||       \n");
+	printf("                                    ||       || ||     || || || || || ||       \n");
+	printf("                                    ||_______|| ||     || || ||_|| || ||       \n");
+	printf("                                    ||_______|| ||     || || |___| || ||       \n");
+
+	Sleep(x);
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                           *        \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||     *           *                \n");
+	printf(" || *             ||      || *   || ||   *  ||                                 \n");
+	printf(" ||     *         ||    * ||     || ||*     ||          *        *         *   \n");
+	printf(" ||_________   *  ||      ||_____|| ||_____||     *                   *        \n");
+	printf(" |_________ |     ||  *   ||_____|| ||_____||              *                   \n");
+	printf("           ||     ||      ||  *  || ||      || *                        *      \n");
+	printf("     *     || *   ||      ||     || ||  *   ||      *          *            *  \n");
+	printf(" *         ||     ||   *  ||     || ||    * ||                          *      \n");
+	printf("  _________||     ||  *   ||     || ||  *   ||       *      *                  \n");
+	printf(" |__________|     ||      ||     || ||      ||   *      *                      \n");
+	printf("                                                                  *       *    \n");
+	printf("                 *                    ____       _______   ___                 \n");
+	printf("     *                     *        ||   *||    | _____ | | _ | || ||   //     \n");
+	printf("            *         *          *  ||*   ||    || *   || || ||*|| ||* //      \n");
+	printf("  *   *                      *      ||____||__  ||     || || || || ||_//       \n");
+	printf("                        *   *       ||_______|| ||_____|| ||*|| ||*| _ |     * \n");
+	printf("         *                          ||       || ||_____|| || || || || ||       \n");
+	printf("     *         *                    ||    *  || ||     || || || || ||*||       \n");
+	printf("          *                   *     || *     || ||  *  || || ||*|| || ||  *    \n");
+	printf("                  *       *     *   ||_______|| ||    *|| || ||_|| || ||       \n");
+	printf("   *                                ||_______|| ||*    || || |___| || ||  *    \n");
+
+	Sleep(x);
+
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                                    \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||                                  \n");
+	printf(" ||               ||      ||     || ||      ||                                 \n");
+	printf(" ||               ||      ||     || ||      ||                                 \n");
+	printf(" ||_________      ||      ||_____|| ||_____||                                  \n");
+	printf(" |_________ |     ||      ||_____|| ||_____||                                  \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("  _________||     ||      ||     || ||      ||                                 \n");
+	printf(" |__________|     ||      ||     || ||      ||                                 \n");
+	printf("                                                                               \n");
+	printf("                                      ____       _______   ___                 \n");
+	printf("                                    ||    ||    | _____ | | _ | || ||   //     \n");
+	printf("                                    ||    ||    ||     || || || || ||  //      \n");
+	printf("                                    ||____||__  ||     || || || || ||_//       \n");
+	printf("                                    ||_______|| ||_____|| || || || | _ |       \n");
+	printf("                                    ||       || ||_____|| || || || || ||       \n");
+	printf("                                    ||       || ||     || || || || || ||       \n");
+	printf("                                    ||       || ||     || || || || || ||       \n");
+	printf("                                    ||_______|| ||     || || ||_|| || ||       \n");
+	printf("                                    ||_______|| ||     || || |___| || ||       \n");
+
+	Sleep(x);
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                           *        \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||     *           *                \n");
+	printf(" || *             ||      || *   || ||   *  ||                                 \n");
+	printf(" ||     *         ||    * ||     || ||*     ||          *        *         *   \n");
+	printf(" ||_________   *  ||      ||_____|| ||_____||     *                   *        \n");
+	printf(" |_________ |     ||  *   ||_____|| ||_____||              *                   \n");
+	printf("           ||     ||      ||  *  || ||      || *                        *      \n");
+	printf("     *     || *   ||      ||     || ||  *   ||      *          *            *  \n");
+	printf(" *         ||     ||   *  ||     || ||    * ||                          *      \n");
+	printf("  _________||     ||  *   ||     || ||  *   ||       *      *                  \n");
+	printf(" |__________|     ||      ||     || ||      ||   *      *                      \n");
+	printf("                                                                  *       *    \n");
+	printf("                 *                    ____       _______   ___                 \n");
+	printf("     *                     *        ||   *||    | _____ | | _ | || ||   //     \n");
+	printf("            *         *          *  ||*   ||    || *   || || ||*|| ||* //      \n");
+	printf("  *   *                      *      ||____||__  ||     || || || || ||_//       \n");
+	printf("                        *   *       ||_______|| ||_____|| ||*|| ||*| _ |     * \n");
+	printf("         *                          ||       || ||_____|| || || || || ||       \n");
+	printf("     *         *                    ||    *  || ||     || || || || ||*||       \n");
+	printf("          *                   *     || *     || ||  *  || || ||*|| || ||  *    \n");
+	printf("                  *       *     *   ||_______|| ||    *|| || ||_|| || ||       \n");
+	printf("   *                                ||_______|| ||*    || || |___| || ||  *    \n");
+
+	Sleep(x);
+
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                                    \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||                                  \n");
+	printf(" ||               ||      ||     || ||      ||                                 \n");
+	printf(" ||               ||      ||     || ||      ||                                 \n");
+	printf(" ||_________      ||      ||_____|| ||_____||                                  \n");
+	printf(" |_________ |     ||      ||_____|| ||_____||                                  \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("  _________||     ||      ||     || ||      ||                                 \n");
+	printf(" |__________|     ||      ||     || ||      ||                                 \n");
+	printf("                                                                               \n");
+	printf("                                      ____       _______   ___                 \n");
+	printf("                                    ||    ||    | _____ | | _ | || ||   //     \n");
+	printf("                                    ||    ||    ||     || || || || ||  //      \n");
+	printf("                                    ||____||__  ||     || || || || ||_//       \n");
+	printf("                                    ||_______|| ||_____|| || || || | _ |       \n");
+	printf("                                    ||       || ||_____|| || || || || ||       \n");
+	printf("                                    ||       || ||     || || || || || ||       \n");
+	printf("                                    ||       || ||     || || || || || ||       \n");
+	printf("                                    ||_______|| ||     || || ||_|| || ||       \n");
+	printf("                                    ||_______|| ||     || || |___| || ||       \n");
+
+	Sleep(x);
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                           *        \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||     *           *                \n");
+	printf(" || *             ||      || *   || ||   *  ||                                 \n");
+	printf(" ||     *         ||    * ||     || ||*     ||          *        *         *   \n");
+	printf(" ||_________   *  ||      ||_____|| ||_____||     *                   *        \n");
+	printf(" |_________ |     ||  *   ||_____|| ||_____||              *                   \n");
+	printf("           ||     ||      ||  *  || ||      || *                        *      \n");
+	printf("     *     || *   ||      ||     || ||  *   ||      *          *            *  \n");
+	printf(" *         ||     ||   *  ||     || ||    * ||                          *      \n");
+	printf("  _________||     ||  *   ||     || ||  *   ||       *      *                  \n");
+	printf(" |__________|     ||      ||     || ||      ||   *      *                      \n");
+	printf("                                                                  *       *    \n");
+	printf("                 *                    ____       _______   ___                 \n");
+	printf("     *                     *        ||   *||    | _____ | | _ | || ||   //     \n");
+	printf("            *         *          *  ||*   ||    || *   || || ||*|| ||* //      \n");
+	printf("  *   *                      *      ||____||__  ||     || || || || ||_//       \n");
+	printf("                        *   *       ||_______|| ||_____|| ||*|| ||*| _ |     * \n");
+	printf("         *                          ||       || ||_____|| || || || || ||       \n");
+	printf("     *         *                    ||    *  || ||     || || || || ||*||       \n");
+	printf("          *                   *     || *     || ||  *  || || ||*|| || ||  *    \n");
+	printf("                  *       *     *   ||_______|| ||    *|| || ||_|| || ||       \n");
+	printf("   *                                ||_______|| ||*    || || |___| || ||  *    \n");
+
+	Sleep(x);
+
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                                    \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||                                  \n");
+	printf(" ||               ||      ||     || ||      ||                                 \n");
+	printf(" ||               ||      ||     || ||      ||                                 \n");
+	printf(" ||_________      ||      ||_____|| ||_____||                                  \n");
+	printf(" |_________ |     ||      ||_____|| ||_____||                                  \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("  _________||     ||      ||     || ||      ||                                 \n");
+	printf(" |__________|     ||      ||     || ||      ||                                 \n");
+	printf("                                                                               \n");
+	printf("                                      ____       _______   ___                 \n");
+	printf("                                    ||    ||    | _____ | | _ | || ||   //     \n");
+	printf("                                    ||    ||    ||     || || || || ||  //      \n");
+	printf("                                    ||____||__  ||     || || || || ||_//       \n");
+	printf("                                    ||_______|| ||_____|| || || || | _ |       \n");
+	printf("                                    ||       || ||_____|| || || || || ||       \n");
+	printf("                                    ||       || ||     || || || || || ||       \n");
+	printf("                                    ||       || ||     || || || || || ||       \n");
+	printf("                                    ||_______|| ||     || || ||_|| || ||       \n");
+	printf("                                    ||_______|| ||     || || |___| || ||       \n");
+
+	Sleep(x);
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                           *        \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||     *           *                \n");
+	printf(" || *             ||      || *   || ||   *  ||                                 \n");
+	printf(" ||     *         ||    * ||     || ||*     ||          *        *         *   \n");
+	printf(" ||_________   *  ||      ||_____|| ||_____||     *                   *        \n");
+	printf(" |_________ |     ||  *   ||_____|| ||_____||              *                   \n");
+	printf("           ||     ||      ||  *  || ||      || *                        *      \n");
+	printf("     *     || *   ||      ||     || ||  *   ||      *          *            *  \n");
+	printf(" *         ||     ||   *  ||     || ||    * ||                          *      \n");
+	printf("  _________||     ||  *   ||     || ||  *   ||       *      *                  \n");
+	printf(" |__________|     ||      ||     || ||      ||   *      *                      \n");
+	printf("                                                                  *       *    \n");
+	printf("                 *                    ____       _______   ___                 \n");
+	printf("     *                     *        ||   *||    | _____ | | _ | || ||   //     \n");
+	printf("            *         *          *  ||*   ||    || *   || || ||*|| ||* //      \n");
+	printf("  *   *                      *      ||____||__  ||     || || || || ||_//       \n");
+	printf("                        *   *       ||_______|| ||_____|| ||*|| ||*| _ |     * \n");
+	printf("         *                          ||       || ||_____|| || || || || ||       \n");
+	printf("     *         *                    ||    *  || ||     || || || || ||*||       \n");
+	printf("          *                   *     || *     || ||  *  || || ||*|| || ||  *    \n");
+	printf("                  *       *     *   ||_______|| ||    *|| || ||_|| || ||       \n");
+	printf("   *                                ||_______|| ||*    || || |___| || ||  *    \n");
+
+	Sleep(x);
+
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                                    \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||                                  \n");
+	printf(" ||               ||      ||     || ||      ||                                 \n");
+	printf(" ||               ||      ||     || ||      ||                                 \n");
+	printf(" ||_________      ||      ||_____|| ||_____||                                  \n");
+	printf(" |_________ |     ||      ||_____|| ||_____||                                  \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("  _________||     ||      ||     || ||      ||                                 \n");
+	printf(" |__________|     ||      ||     || ||      ||                                 \n");
+	printf("                                                                               \n");
+	printf("                                      ____       _______   ___                 \n");
+	printf("                                    ||    ||    | _____ | | _ | || ||   //     \n");
+	printf("                                    ||    ||    ||     || || || || ||  //      \n");
+	printf("                                    ||____||__  ||     || || || || ||_//       \n");
+	printf("                                    ||_______|| ||_____|| || || || | _ |       \n");
+	printf("                                    ||       || ||_____|| || || || || ||       \n");
+	printf("                                    ||       || ||     || || || || || ||       \n");
+	printf("                                    ||       || ||     || || || || || ||       \n");
+	printf("                                    ||_______|| ||     || || ||_|| || ||       \n");
+	printf("                                    ||_______|| ||     || || |___| || ||       \n");
+
+	Sleep(x);
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                           *        \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||     *           *                \n");
+	printf(" || *             ||      || *   || ||   *  ||                                 \n");
+	printf(" ||     *         ||    * ||     || ||*     ||          *        *         *   \n");
+	printf(" ||_________   *  ||      ||_____|| ||_____||     *                   *        \n");
+	printf(" |_________ |     ||  *   ||_____|| ||_____||              *                   \n");
+	printf("           ||     ||      ||  *  || ||      || *                        *      \n");
+	printf("     *     || *   ||      ||     || ||  *   ||      *          *            *  \n");
+	printf(" *         ||     ||   *  ||     || ||    * ||                          *      \n");
+	printf("  _________||     ||  *   ||     || ||  *   ||       *      *                  \n");
+	printf(" |__________|     ||      ||     || ||      ||   *      *                      \n");
+	printf("                                                                  *       *    \n");
+	printf("                 *                    ____       _______   ___                 \n");
+	printf("     *                     *        ||   *||    | _____ | | _ | || ||   //     \n");
+	printf("            *         *          *  ||*   ||    || *   || || ||*|| ||* //      \n");
+	printf("  *   *                      *      ||____||__  ||     || || || || ||_//       \n");
+	printf("                        *   *       ||_______|| ||_____|| ||*|| ||*| _ |     * \n");
+	printf("         *                          ||       || ||_____|| || || || || ||       \n");
+	printf("     *         *                    ||    *  || ||     || || || || ||*||       \n");
+	printf("          *                   *     || *     || ||  *  || || ||*|| || ||  *    \n");
+	printf("                  *       *     *   ||_______|| ||    *|| || ||_|| || ||       \n");
+	printf("   *                                ||_______|| ||*    || || |___| || ||  *    \n");
+
+	Sleep(x);
+
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                                    \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||                                  \n");
+	printf(" ||               ||      ||     || ||      ||                                 \n");
+	printf(" ||               ||      ||     || ||      ||                                 \n");
+	printf(" ||_________      ||      ||_____|| ||_____||                                  \n");
+	printf(" |_________ |     ||      ||_____|| ||_____||                                  \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("  _________||     ||      ||     || ||      ||                                 \n");
+	printf(" |__________|     ||      ||     || ||      ||                                 \n");
+	printf("                                                                               \n");
+	printf("                                      ____       _______   ___                 \n");
+	printf("                                    ||    ||    | _____ | | _ | || ||   //     \n");
+	printf("                                    ||    ||    ||     || || || || ||  //      \n");
+	printf("                                    ||____||__  ||     || || || || ||_//       \n");
+	printf("                                    ||_______|| ||_____|| || || || | _ |       \n");
+	printf("                                    ||       || ||_____|| || || || || ||       \n");
+	printf("                                    ||       || ||     || || || || || ||       \n");
+	printf("                                    ||       || ||     || || || || || ||       \n");
+	printf("                                    ||_______|| ||     || || ||_|| || ||       \n");
+	printf("                                    ||_______|| ||     || || |___| || ||       \n");
+
+	Sleep(x);
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                           *        \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||     *           *                \n");
+	printf(" || *             ||      || *   || ||   *  ||                                 \n");
+	printf(" ||     *         ||    * ||     || ||*     ||          *        *         *   \n");
+	printf(" ||_________   *  ||      ||_____|| ||_____||     *                   *        \n");
+	printf(" |_________ |     ||  *   ||_____|| ||_____||              *                   \n");
+	printf("           ||     ||      ||  *  || ||      || *                        *      \n");
+	printf("     *     || *   ||      ||     || ||  *   ||      *          *            *  \n");
+	printf(" *         ||     ||   *  ||     || ||    * ||                          *      \n");
+	printf("  _________||     ||  *   ||     || ||  *   ||       *      *                  \n");
+	printf(" |__________|     ||      ||     || ||      ||   *      *                      \n");
+	printf("                                                                  *       *    \n");
+	printf("                 *                    ____       _______   ___                 \n");
+	printf("     *                     *        ||   *||    | _____ | | _ | || ||   //     \n");
+	printf("            *         *          *  ||*   ||    || *   || || ||*|| ||* //      \n");
+	printf("  *   *                      *      ||____||__  ||     || || || || ||_//       \n");
+	printf("                        *   *       ||_______|| ||_____|| ||*|| ||*| _ |     * \n");
+	printf("         *                          ||       || ||_____|| || || || || ||       \n");
+	printf("     *         *                    ||    *  || ||     || || || || ||*||       \n");
+	printf("          *                   *     || *     || ||  *  || || ||*|| || ||  *    \n");
+	printf("                  *       *     *   ||_______|| ||    *|| || ||_|| || ||       \n");
+	printf("   *                                ||_______|| ||*    || || |___| || ||  *    \n");
+
+	Sleep(x);
+
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                                    \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||                                  \n");
+	printf(" ||               ||      ||     || ||      ||                                 \n");
+	printf(" ||               ||      ||     || ||      ||                                 \n");
+	printf(" ||_________      ||      ||_____|| ||_____||                                  \n");
+	printf(" |_________ |     ||      ||_____|| ||_____||                                  \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("  _________||     ||      ||     || ||      ||                                 \n");
+	printf(" |__________|     ||      ||     || ||      ||                                 \n");
+	printf("                                                                               \n");
+	printf("                                      ____       _______   ___                 \n");
+	printf("                                    ||    ||    | _____ | | _ | || ||   //     \n");
+	printf("                                    ||    ||    ||     || || || || ||  //      \n");
+	printf("                                    ||____||__  ||     || || || || ||_//       \n");
+	printf("                                    ||_______|| ||_____|| || || || | _ |       \n");
+	printf("                                    ||       || ||_____|| || || || || ||       \n");
+	printf("                                    ||       || ||     || || || || || ||       \n");
+	printf("                                    ||       || ||     || || || || || ||       \n");
+	printf("                                    ||_______|| ||     || || ||_|| || ||       \n");
+	printf("                                    ||_______|| ||     || || |___| || ||       \n");
+
+	Sleep(x);
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                           *        \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||     *           *                \n");
+	printf(" || *             ||      || *   || ||   *  ||                                 \n");
+	printf(" ||     *         ||    * ||     || ||*     ||          *        *         *   \n");
+	printf(" ||_________   *  ||      ||_____|| ||_____||     *                   *        \n");
+	printf(" |_________ |     ||  *   ||_____|| ||_____||              *                   \n");
+	printf("           ||     ||      ||  *  || ||      || *                        *      \n");
+	printf("     *     || *   ||      ||     || ||  *   ||      *          *            *  \n");
+	printf(" *         ||     ||   *  ||     || ||    * ||                          *      \n");
+	printf("  _________||     ||  *   ||     || ||  *   ||       *      *                  \n");
+	printf(" |__________|     ||      ||     || ||      ||   *      *                      \n");
+	printf("                                                                  *       *    \n");
+	printf("                 *                    ____       _______   ___                 \n");
+	printf("     *                     *        ||   *||    | _____ | | _ | || ||   //     \n");
+	printf("            *         *          *  ||*   ||    || *   || || ||*|| ||* //      \n");
+	printf("  *   *                      *      ||____||__  ||     || || || || ||_//       \n");
+	printf("                        *   *       ||_______|| ||_____|| ||*|| ||*| _ |     * \n");
+	printf("         *                          ||       || ||_____|| || || || || ||       \n");
+	printf("     *         *                    ||    *  || ||     || || || || ||*||       \n");
+	printf("          *                   *     || *     || ||  *  || || ||*|| || ||  *    \n");
+	printf("                  *       *     *   ||_______|| ||    *|| || ||_|| || ||       \n");
+	printf("   *                                ||_______|| ||*    || || |___| || ||  *    \n");
+
+	Sleep(x);
+
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                                    \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||                                  \n");
+	printf(" ||               ||      ||     || ||      ||                                 \n");
+	printf(" ||               ||      ||     || ||      ||                                 \n");
+	printf(" ||_________      ||      ||_____|| ||_____||                                  \n");
+	printf(" |_________ |     ||      ||_____|| ||_____||                                  \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("  _________||     ||      ||     || ||      ||                                 \n");
+	printf(" |__________|     ||      ||     || ||      ||                                 \n");
+	printf("                                                                               \n");
+	printf("                                      ____       _______   ___                 \n");
+	printf("                                    ||    ||    | _____ | | _ | || ||   //     \n");
+	printf("                                    ||    ||    ||     || || || || ||  //      \n");
+	printf("                                    ||____||__  ||     || || || || ||_//       \n");
+	printf("                                    ||_______|| ||_____|| || || || | _ |       \n");
+	printf("                                    ||       || ||_____|| || || || || ||       \n");
+	printf("                                    ||       || ||     || || || || || ||       \n");
+	printf("                                    ||       || ||     || || || || || ||       \n");
+	printf("                                    ||_______|| ||     || || ||_|| || ||       \n");
+	printf("                                    ||_______|| ||     || || |___| || ||       \n");
+
+	Sleep(x);
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                           *        \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||     *           *                \n");
+	printf(" || *             ||      || *   || ||   *  ||                                 \n");
+	printf(" ||     *         ||    * ||     || ||*     ||          *        *         *   \n");
+	printf(" ||_________   *  ||      ||_____|| ||_____||     *                   *        \n");
+	printf(" |_________ |     ||  *   ||_____|| ||_____||              *                   \n");
+	printf("           ||     ||      ||  *  || ||      || *                        *      \n");
+	printf("     *     || *   ||      ||     || ||  *   ||      *          *            *  \n");
+	printf(" *         ||     ||   *  ||     || ||    * ||                          *      \n");
+	printf("  _________||     ||  *   ||     || ||  *   ||       *      *                  \n");
+	printf(" |__________|     ||      ||     || ||      ||   *      *                      \n");
+	printf("                                                                  *       *    \n");
+	printf("                 *                    ____       _______   ___                 \n");
+	printf("     *                     *        ||   *||    | _____ | | _ | || ||   //     \n");
+	printf("            *         *          *  ||*   ||    || *   || || ||*|| ||* //      \n");
+	printf("  *   *                      *      ||____||__  ||     || || || || ||_//       \n");
+	printf("                        *   *       ||_______|| ||_____|| ||*|| ||*| _ |     * \n");
+	printf("         *                          ||       || ||_____|| || || || || ||       \n");
+	printf("     *         *                    ||    *  || ||     || || || || ||*||       \n");
+	printf("          *                   *     || *     || ||  *  || || ||*|| || ||  *    \n");
+	printf("                  *       *     *   ||_______|| ||    *|| || ||_|| || ||       \n");
+	printf("   *                                ||_______|| ||*    || || |___| || ||  *    \n");
+
+	Sleep(x);
+
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                                    \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||                                  \n");
+	printf(" ||               ||      ||     || ||      ||                                 \n");
+	printf(" ||               ||      ||     || ||      ||                                 \n");
+	printf(" ||_________      ||      ||_____|| ||_____||                                  \n");
+	printf(" |_________ |     ||      ||_____|| ||_____||                                  \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("  _________||     ||      ||     || ||      ||                                 \n");
+	printf(" |__________|     ||      ||     || ||      ||                                 \n");
+	printf("                                                                               \n");
+	printf("                                      ____       _______   ___                 \n");
+	printf("                                    ||    ||    | _____ | | _ | || ||   //     \n");
+	printf("                                    ||    ||    ||     || || || || ||  //      \n");
+	printf("                                    ||____||__  ||     || || || || ||_//       \n");
+	printf("                                    ||_______|| ||_____|| || || || | _ |       \n");
+	printf("                                    ||       || ||_____|| || || || || ||       \n");
+	printf("                                    ||       || ||     || || || || || ||       \n");
+	printf("                                    ||       || ||     || || || || || ||       \n");
+	printf("                                    ||_______|| ||     || || ||_|| || ||       \n");
+	printf("                                    ||_______|| ||     || || |___| || ||       \n");
+
+	Sleep(x);
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                           *        \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||     *           *                \n");
+	printf(" || *             ||      || *   || ||   *  ||                                 \n");
+	printf(" ||     *         ||    * ||     || ||*     ||          *        *         *   \n");
+	printf(" ||_________   *  ||      ||_____|| ||_____||     *                   *        \n");
+	printf(" |_________ |     ||  *   ||_____|| ||_____||              *                   \n");
+	printf("           ||     ||      ||  *  || ||      || *                        *      \n");
+	printf("     *     || *   ||      ||     || ||  *   ||      *          *            *  \n");
+	printf(" *         ||     ||   *  ||     || ||    * ||                          *      \n");
+	printf("  _________||     ||  *   ||     || ||  *   ||       *      *                  \n");
+	printf(" |__________|     ||      ||     || ||      ||   *      *                      \n");
+	printf("                                                                  *       *    \n");
+	printf("                 *                    ____       _______   ___                 \n");
+	printf("     *                     *        ||   *||    | _____ | | _ | || ||   //     \n");
+	printf("            *         *          *  ||*   ||    || *   || || ||*|| ||* //      \n");
+	printf("  *   *                      *      ||____||__  ||     || || || || ||_//       \n");
+	printf("                        *   *       ||_______|| ||_____|| ||*|| ||*| _ |     * \n");
+	printf("         *                          ||       || ||_____|| || || || || ||       \n");
+	printf("     *         *                    ||    *  || ||     || || || || ||*||       \n");
+	printf("          *                   *     || *     || ||  *  || || ||*|| || ||  *    \n");
+	printf("                  *       *     *   ||_______|| ||    *|| || ||_|| || ||       \n");
+	printf("   *                                ||_______|| ||*    || || |___| || ||  *    \n");
+
+	Sleep(x);
+
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                                    \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||                                  \n");
+	printf(" ||               ||      ||     || ||      ||                                 \n");
+	printf(" ||               ||      ||     || ||      ||                                 \n");
+	printf(" ||_________      ||      ||_____|| ||_____||                                  \n");
+	printf(" |_________ |     ||      ||_____|| ||_____||                                  \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("  _________||     ||      ||     || ||      ||                                 \n");
+	printf(" |__________|     ||      ||     || ||      ||                                 \n");
+	printf("                                                                               \n");
+	printf("                                      ____       _______   ___                 \n");
+	printf("                                    ||    ||    | _____ | | _ | || ||   //     \n");
+	printf("                                    ||    ||    ||     || || || || ||  //      \n");
+	printf("                                    ||____||__  ||     || || || || ||_//       \n");
+	printf("                                    ||_______|| ||_____|| || || || | _ |       \n");
+	printf("                                    ||       || ||_____|| || || || || ||       \n");
+	printf("                                    ||       || ||     || || || || || ||       \n");
+	printf("                                    ||       || ||     || || || || || ||       \n");
+	printf("                                    ||_______|| ||     || || ||_|| || ||       \n");
+	printf("                                    ||_______|| ||     || || |___| || ||       \n");
+
+	Sleep(x);
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                           *        \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||     *           *                \n");
+	printf(" || *             ||      || *   || ||   *  ||                                 \n");
+	printf(" ||     *         ||    * ||     || ||*     ||          *        *         *   \n");
+	printf(" ||_________   *  ||      ||_____|| ||_____||     *                   *        \n");
+	printf(" |_________ |     ||  *   ||_____|| ||_____||              *                   \n");
+	printf("           ||     ||      ||  *  || ||      || *                        *      \n");
+	printf("     *     || *   ||      ||     || ||  *   ||      *          *            *  \n");
+	printf(" *         ||     ||   *  ||     || ||    * ||                          *      \n");
+	printf("  _________||     ||  *   ||     || ||  *   ||       *      *                  \n");
+	printf(" |__________|     ||      ||     || ||      ||   *      *                      \n");
+	printf("                                                                  *       *    \n");
+	printf("                 *                    ____       _______   ___                 \n");
+	printf("     *                     *        ||   *||    | _____ | | _ | || ||   //     \n");
+	printf("            *         *          *  ||*   ||    || *   || || ||*|| ||* //      \n");
+	printf("  *   *                      *      ||____||__  ||     || || || || ||_//       \n");
+	printf("                        *   *       ||_______|| ||_____|| ||*|| ||*| _ |     * \n");
+	printf("         *                          ||       || ||_____|| || || || || ||       \n");
+	printf("     *         *                    ||    *  || ||     || || || || ||*||       \n");
+	printf("          *                   *     || *     || ||  *  || || ||*|| || ||  *    \n");
+	printf("                  *       *     *   ||_______|| ||    *|| || ||_|| || ||       \n");
+	printf("   *                                ||_______|| ||*    || || |___| || ||  *    \n");
+
+	Sleep(x);
+
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                                    \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||                                  \n");
+	printf(" ||               ||      ||     || ||      ||                                 \n");
+	printf(" ||               ||      ||     || ||      ||                                 \n");
+	printf(" ||_________      ||      ||_____|| ||_____||                                  \n");
+	printf(" |_________ |     ||      ||_____|| ||_____||                                  \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("  _________||     ||      ||     || ||      ||                                 \n");
+	printf(" |__________|     ||      ||     || ||      ||                                 \n");
+	printf("                                                                               \n");
+	printf("                                      ____       _______   ___                 \n");
+	printf("                                    ||    ||    | _____ | | _ | || ||   //     \n");
+	printf("                                    ||    ||    ||     || || || || ||  //      \n");
+	printf("                                    ||____||__  ||     || || || || ||_//       \n");
+	printf("                                    ||_______|| ||_____|| || || || | _ |       \n");
+	printf("                                    ||       || ||_____|| || || || || ||       \n");
+	printf("                                    ||       || ||     || || || || || ||       \n");
+	printf("                                    ||       || ||     || || || || || ||       \n");
+	printf("                                    ||_______|| ||     || || ||_|| || ||       \n");
+	printf("                                    ||_______|| ||     || || |___| || ||       \n");
+
+	Sleep(x);
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                           *        \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||     *           *                \n");
+	printf(" || *             ||      || *   || ||   *  ||                                 \n");
+	printf(" ||     *         ||    * ||     || ||*     ||          *        *         *   \n");
+	printf(" ||_________   *  ||      ||_____|| ||_____||     *                   *        \n");
+	printf(" |_________ |     ||  *   ||_____|| ||_____||              *                   \n");
+	printf("           ||     ||      ||  *  || ||      || *                        *      \n");
+	printf("     *     || *   ||      ||     || ||  *   ||      *          *            *  \n");
+	printf(" *         ||     ||   *  ||     || ||    * ||                          *      \n");
+	printf("  _________||     ||  *   ||     || ||  *   ||       *      *                  \n");
+	printf(" |__________|     ||      ||     || ||      ||   *      *                      \n");
+	printf("                                                                  *       *    \n");
+	printf("                 *                    ____       _______   ___                 \n");
+	printf("     *                     *        ||   *||    | _____ | | _ | || ||   //     \n");
+	printf("            *         *          *  ||*   ||    || *   || || ||*|| ||* //      \n");
+	printf("  *   *                      *      ||____||__  ||     || || || || ||_//       \n");
+	printf("                        *   *       ||_______|| ||_____|| ||*|| ||*| _ |     * \n");
+	printf("         *                          ||       || ||_____|| || || || || ||       \n");
+	printf("     *         *                    ||    *  || ||     || || || || ||*||       \n");
+	printf("          *                   *     || *     || ||  *  || || ||*|| || ||  *    \n");
+	printf("                  *       *     *   ||_______|| ||    *|| || ||_|| || ||       \n");
+	printf("   *                                ||_______|| ||*    || || |___| || ||  *    \n");
+
+	Sleep(x);
+
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                                    \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||                                  \n");
+	printf(" ||               ||      ||     || ||      ||                                 \n");
+	printf(" ||               ||      ||     || ||      ||                                 \n");
+	printf(" ||_________      ||      ||_____|| ||_____||                                  \n");
+	printf(" |_________ |     ||      ||_____|| ||_____||                                  \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("  _________||     ||      ||     || ||      ||                                 \n");
+	printf(" |__________|     ||      ||     || ||      ||                                 \n");
+	printf("                                                                               \n");
+	printf("                                      ____       _______   ___                 \n");
+	printf("                                    ||    ||    | _____ | | _ | || ||   //     \n");
+	printf("                                    ||    ||    ||     || || || || ||  //      \n");
+	printf("                                    ||____||__  ||     || || || || ||_//       \n");
+	printf("                                    ||_______|| ||_____|| || || || | _ |       \n");
+	printf("                                    ||       || ||_____|| || || || || ||       \n");
+	printf("                                    ||       || ||     || || || || || ||       \n");
+	printf("                                    ||       || ||     || || || || || ||       \n");
+	printf("                                    ||_______|| ||     || || ||_|| || ||       \n");
+	printf("                                    ||_______|| ||     || || |___| || ||       \n");
+
+	Sleep(x);
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                           *        \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||     *           *                \n");
+	printf(" || *             ||      || *   || ||   *  ||                                 \n");
+	printf(" ||     *         ||    * ||     || ||*     ||          *        *         *   \n");
+	printf(" ||_________   *  ||      ||_____|| ||_____||     *                   *        \n");
+	printf(" |_________ |     ||  *   ||_____|| ||_____||              *                   \n");
+	printf("           ||     ||      ||  *  || ||      || *                        *      \n");
+	printf("     *     || *   ||      ||     || ||  *   ||      *          *            *  \n");
+	printf(" *         ||     ||   *  ||     || ||    * ||                          *      \n");
+	printf("  _________||     ||  *   ||     || ||  *   ||       *      *                  \n");
+	printf(" |__________|     ||      ||     || ||      ||   *      *                      \n");
+	printf("                                                                  *       *    \n");
+	printf("                 *                    ____       _______   ___                 \n");
+	printf("     *                     *        ||   *||    | _____ | | _ | || ||   //     \n");
+	printf("            *         *          *  ||*   ||    || *   || || ||*|| ||* //      \n");
+	printf("  *   *                      *      ||____||__  ||     || || || || ||_//       \n");
+	printf("                        *   *       ||_______|| ||_____|| ||*|| ||*| _ |     * \n");
+	printf("         *                          ||       || ||_____|| || || || || ||       \n");
+	printf("     *         *                    ||    *  || ||     || || || || ||*||       \n");
+	printf("          *                   *     || *     || ||  *  || || ||*|| || ||  *    \n");
+	printf("                  *       *     *   ||_______|| ||    *|| || ||_|| || ||       \n");
+	printf("   *                                ||_______|| ||*    || || |___| || ||  *    \n");
+
+	Sleep(x);
+
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                                    \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||                                  \n");
+	printf(" ||               ||      ||     || ||      ||                                 \n");
+	printf(" ||               ||      ||     || ||      ||                                 \n");
+	printf(" ||_________      ||      ||_____|| ||_____||                                  \n");
+	printf(" |_________ |     ||      ||_____|| ||_____||                                  \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("  _________||     ||      ||     || ||      ||                                 \n");
+	printf(" |__________|     ||      ||     || ||      ||                                 \n");
+	printf("                                                                               \n");
+	printf("                                      ____       _______   ___                 \n");
+	printf("                                    ||    ||    | _____ | | _ | || ||   //     \n");
+	printf("                                    ||    ||    ||     || || || || ||  //      \n");
+	printf("                                    ||____||__  ||     || || || || ||_//       \n");
+	printf("                                    ||_______|| ||_____|| || || || | _ |       \n");
+	printf("                                    ||       || ||_____|| || || || || ||       \n");
+	printf("                                    ||       || ||     || || || || || ||       \n");
+	printf("                                    ||       || ||     || || || || || ||       \n");
+	printf("                                    ||_______|| ||     || || ||_|| || ||       \n");
+	printf("                                    ||_______|| ||     || || |___| || ||       \n");
+
+	Sleep(x);
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                           *        \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||     *           *                \n");
+	printf(" || *             ||      || *   || ||   *  ||                                 \n");
+	printf(" ||     *         ||    * ||     || ||*     ||          *        *         *   \n");
+	printf(" ||_________   *  ||      ||_____|| ||_____||     *                   *        \n");
+	printf(" |_________ |     ||  *   ||_____|| ||_____||              *                   \n");
+	printf("           ||     ||      ||  *  || ||      || *                        *      \n");
+	printf("     *     || *   ||      ||     || ||  *   ||      *          *            *  \n");
+	printf(" *         ||     ||   *  ||     || ||    * ||                          *      \n");
+	printf("  _________||     ||  *   ||     || ||  *   ||       *      *                  \n");
+	printf(" |__________|     ||      ||     || ||      ||   *      *                      \n");
+	printf("                                                                  *       *    \n");
+	printf("                 *                    ____       _______   ___                 \n");
+	printf("     *                     *        ||   *||    | _____ | | _ | || ||   //     \n");
+	printf("            *         *          *  ||*   ||    || *   || || ||*|| ||* //      \n");
+	printf("  *   *                      *      ||____||__  ||     || || || || ||_//       \n");
+	printf("                        *   *       ||_______|| ||_____|| ||*|| ||*| _ |     * \n");
+	printf("         *                          ||       || ||_____|| || || || || ||       \n");
+	printf("     *         *                    ||    *  || ||     || || || || ||*||       \n");
+	printf("          *                   *     || *     || ||  *  || || ||*|| || ||  *    \n");
+	printf("                  *       *     *   ||_______|| ||    *|| || ||_|| || ||       \n");
+	printf("   *                                ||_______|| ||*    || || |___| || ||  *    \n");
+
+	Sleep(x);
+
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                                    \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||                                  \n");
+	printf(" ||               ||      ||     || ||      ||                                 \n");
+	printf(" ||               ||      ||     || ||      ||                                 \n");
+	printf(" ||_________      ||      ||_____|| ||_____||                                  \n");
+	printf(" |_________ |     ||      ||_____|| ||_____||                                  \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("  _________||     ||      ||     || ||      ||                                 \n");
+	printf(" |__________|     ||      ||     || ||      ||                                 \n");
+	printf("                                                                               \n");
+	printf("                                      ____       _______   ___                 \n");
+	printf("                                    ||    ||    | _____ | | _ | || ||   //     \n");
+	printf("                                    ||    ||    ||     || || || || ||  //      \n");
+	printf("                                    ||____||__  ||     || || || || ||_//       \n");
+	printf("                                    ||_______|| ||_____|| || || || | _ |       \n");
+	printf("                                    ||       || ||_____|| || || || || ||       \n");
+	printf("                                    ||       || ||     || || || || || ||       \n");
+	printf("                                    ||       || ||     || || || || || ||       \n");
+	printf("                                    ||_______|| ||     || || ||_|| || ||       \n");
+	printf("                                    ||_______|| ||     || || |___| || ||       \n");
+
+	Sleep(x);
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                           *        \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||     *           *                \n");
+	printf(" || *             ||      || *   || ||   *  ||                                 \n");
+	printf(" ||     *         ||    * ||     || ||*     ||          *        *         *   \n");
+	printf(" ||_________   *  ||      ||_____|| ||_____||     *                   *        \n");
+	printf(" |_________ |     ||  *   ||_____|| ||_____||              *                   \n");
+	printf("           ||     ||      ||  *  || ||      || *                        *      \n");
+	printf("     *     || *   ||      ||     || ||  *   ||      *          *            *  \n");
+	printf(" *         ||     ||   *  ||     || ||    * ||                          *      \n");
+	printf("  _________||     ||  *   ||     || ||  *   ||       *      *                  \n");
+	printf(" |__________|     ||      ||     || ||      ||   *      *                      \n");
+	printf("                                                                  *       *    \n");
+	printf("                 *                    ____       _______   ___                 \n");
+	printf("     *                     *        ||   *||    | _____ | | _ | || ||   //     \n");
+	printf("            *         *          *  ||*   ||    || *   || || ||*|| ||* //      \n");
+	printf("  *   *                      *      ||____||__  ||     || || || || ||_//       \n");
+	printf("                        *   *       ||_______|| ||_____|| ||*|| ||*| _ |     * \n");
+	printf("         *                          ||       || ||_____|| || || || || ||       \n");
+	printf("     *         *                    ||    *  || ||     || || || || ||*||       \n");
+	printf("          *                   *     || *     || ||  *  || || ||*|| || ||  *    \n");
+	printf("                  *       *     *   ||_______|| ||    *|| || ||_|| || ||       \n");
+	printf("   *                                ||_______|| ||*    || || |___| || ||  *    \n");
+
+	Sleep(x);
+
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                                    \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||                                  \n");
+	printf(" ||               ||      ||     || ||      ||                                 \n");
+	printf(" ||               ||      ||     || ||      ||                                 \n");
+	printf(" ||_________      ||      ||_____|| ||_____||                                  \n");
+	printf(" |_________ |     ||      ||_____|| ||_____||                                  \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("  _________||     ||      ||     || ||      ||                                 \n");
+	printf(" |__________|     ||      ||     || ||      ||                                 \n");
+	printf("                                                                               \n");
+	printf("                                      ____       _______   ___                 \n");
+	printf("                                    ||    ||    | _____ | | _ | || ||   //     \n");
+	printf("                                    ||    ||    ||     || || || || ||  //      \n");
+	printf("                                    ||____||__  ||     || || || || ||_//       \n");
+	printf("                                    ||_______|| ||_____|| || || || | _ |       \n");
+	printf("                                    ||       || ||_____|| || || || || ||       \n");
+	printf("                                    ||       || ||     || || || || || ||       \n");
+	printf("                                    ||       || ||     || || || || || ||       \n");
+	printf("                                    ||_______|| ||     || || ||_|| || ||       \n");
+	printf("                                    ||_______|| ||     || || |___| || ||       \n");
+
+	Sleep(x);
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                           *        \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||     *           *                \n");
+	printf(" || *             ||      || *   || ||   *  ||                                 \n");
+	printf(" ||     *         ||    * ||     || ||*     ||          *        *         *   \n");
+	printf(" ||_________   *  ||      ||_____|| ||_____||     *                   *        \n");
+	printf(" |_________ |     ||  *   ||_____|| ||_____||              *                   \n");
+	printf("           ||     ||      ||  *  || ||      || *                        *      \n");
+	printf("     *     || *   ||      ||     || ||  *   ||      *          *            *  \n");
+	printf(" *         ||     ||   *  ||     || ||    * ||                          *      \n");
+	printf("  _________||     ||  *   ||     || ||  *   ||       *      *                  \n");
+	printf(" |__________|     ||      ||     || ||      ||   *      *                      \n");
+	printf("                                                                  *       *    \n");
+	printf("                 *                    ____       _______   ___                 \n");
+	printf("     *                     *        ||   *||    | _____ | | _ | || ||   //     \n");
+	printf("            *         *          *  ||*   ||    || *   || || ||*|| ||* //      \n");
+	printf("  *   *                      *      ||____||__  ||     || || || || ||_//       \n");
+	printf("                        *   *       ||_______|| ||_____|| ||*|| ||*| _ |     * \n");
+	printf("         *                          ||       || ||_____|| || || || || ||       \n");
+	printf("     *         *                    ||    *  || ||     || || || || ||*||       \n");
+	printf("          *                   *     || *     || ||  *  || || ||*|| || ||  *    \n");
+	printf("                  *       *     *   ||_______|| ||    *|| || ||_|| || ||       \n");
+	printf("   *                                ||_______|| ||*    || || |___| || ||  *    \n");
+
+	Sleep(x);
+
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                                    \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||                                  \n");
+	printf(" ||               ||      ||     || ||      ||                                 \n");
+	printf(" ||               ||      ||     || ||      ||                                 \n");
+	printf(" ||_________      ||      ||_____|| ||_____||                                  \n");
+	printf(" |_________ |     ||      ||_____|| ||_____||                                  \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("  _________||     ||      ||     || ||      ||                                 \n");
+	printf(" |__________|     ||      ||     || ||      ||                                 \n");
+	printf("                                                                               \n");
+	printf("                                      ____       _______   ___                 \n");
+	printf("                                    ||    ||    | _____ | | _ | || ||   //     \n");
+	printf("                                    ||    ||    ||     || || || || ||  //      \n");
+	printf("                                    ||____||__  ||     || || || || ||_//       \n");
+	printf("                                    ||_______|| ||_____|| || || || | _ |       \n");
+	printf("                                    ||       || ||_____|| || || || || ||       \n");
+	printf("                                    ||       || ||     || || || || || ||       \n");
+	printf("                                    ||       || ||     || || || || || ||       \n");
+	printf("                                    ||_______|| ||     || || ||_|| || ||       \n");
+	printf("                                    ||_______|| ||     || || |___| || ||       \n");
+
+	Sleep(x);
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                           *        \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||     *           *                \n");
+	printf(" || *             ||      || *   || ||   *  ||                                 \n");
+	printf(" ||     *         ||    * ||     || ||*     ||          *        *         *   \n");
+	printf(" ||_________   *  ||      ||_____|| ||_____||     *                   *        \n");
+	printf(" |_________ |     ||  *   ||_____|| ||_____||              *                   \n");
+	printf("           ||     ||      ||  *  || ||      || *                        *      \n");
+	printf("     *     || *   ||      ||     || ||  *   ||      *          *            *  \n");
+	printf(" *         ||     ||   *  ||     || ||    * ||                          *      \n");
+	printf("  _________||     ||  *   ||     || ||  *   ||       *      *                  \n");
+	printf(" |__________|     ||      ||     || ||      ||   *      *                      \n");
+	printf("                                                                  *       *    \n");
+	printf("                 *                    ____       _______   ___                 \n");
+	printf("     *                     *        ||   *||    | _____ | | _ | || ||   //     \n");
+	printf("            *         *          *  ||*   ||    || *   || || ||*|| ||* //      \n");
+	printf("  *   *                      *      ||____||__  ||     || || || || ||_//       \n");
+	printf("                        *   *       ||_______|| ||_____|| ||*|| ||*| _ |     * \n");
+	printf("         *                          ||       || ||_____|| || || || || ||       \n");
+	printf("     *         *                    ||    *  || ||     || || || || ||*||       \n");
+	printf("          *                   *     || *     || ||  *  || || ||*|| || ||  *    \n");
+	printf("                  *       *     *   ||_______|| ||    *|| || ||_|| || ||       \n");
+	printf("   *                                ||_______|| ||*    || || |___| || ||  *    \n");
+
+	Sleep(x);
+
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                                    \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||                                  \n");
+	printf(" ||               ||      ||     || ||      ||                                 \n");
+	printf(" ||               ||      ||     || ||      ||                                 \n");
+	printf(" ||_________      ||      ||_____|| ||_____||                                  \n");
+	printf(" |_________ |     ||      ||_____|| ||_____||                                  \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("  _________||     ||      ||     || ||      ||                                 \n");
+	printf(" |__________|     ||      ||     || ||      ||                                 \n");
+	printf("                                                                               \n");
+	printf("                                      ____       _______   ___                 \n");
+	printf("                                    ||    ||    | _____ | | _ | || ||   //     \n");
+	printf("                                    ||    ||    ||     || || || || ||  //      \n");
+	printf("                                    ||____||__  ||     || || || || ||_//       \n");
+	printf("                                    ||_______|| ||_____|| || || || | _ |       \n");
+	printf("                                    ||       || ||_____|| || || || || ||       \n");
+	printf("                                    ||       || ||     || || || || || ||       \n");
+	printf("                                    ||       || ||     || || || || || ||       \n");
+	printf("                                    ||_______|| ||     || || ||_|| || ||       \n");
+	printf("                                    ||_______|| ||     || || |___| || ||       \n");
+
+	Sleep(x);
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                           *        \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||     *           *                \n");
+	printf(" || *             ||      || *   || ||   *  ||                                 \n");
+	printf(" ||     *         ||    * ||     || ||*     ||          *        *         *   \n");
+	printf(" ||_________   *  ||      ||_____|| ||_____||     *                   *        \n");
+	printf(" |_________ |     ||  *   ||_____|| ||_____||              *                   \n");
+	printf("           ||     ||      ||  *  || ||      || *                        *      \n");
+	printf("     *     || *   ||      ||     || ||  *   ||      *          *            *  \n");
+	printf(" *         ||     ||   *  ||     || ||    * ||                          *      \n");
+	printf("  _________||     ||  *   ||     || ||  *   ||       *      *                  \n");
+	printf(" |__________|     ||      ||     || ||      ||   *      *                      \n");
+	printf("                                                                  *       *    \n");
+	printf("                 *                    ____       _______   ___                 \n");
+	printf("     *                     *        ||   *||    | _____ | | _ | || ||   //     \n");
+	printf("            *         *          *  ||*   ||    || *   || || ||*|| ||* //      \n");
+	printf("  *   *                      *      ||____||__  ||     || || || || ||_//       \n");
+	printf("                        *   *       ||_______|| ||_____|| ||*|| ||*| _ |     * \n");
+	printf("         *                          ||       || ||_____|| || || || || ||       \n");
+	printf("     *         *                    ||    *  || ||     || || || || ||*||       \n");
+	printf("          *                   *     || *     || ||  *  || || ||*|| || ||  *    \n");
+	printf("                  *       *     *   ||_______|| ||    *|| || ||_|| || ||       \n");
+	printf("   *                                ||_______|| ||*    || || |___| || ||  *    \n");
+
+	Sleep(x);
+
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                                    \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||                                  \n");
+	printf(" ||               ||      ||     || ||      ||                                 \n");
+	printf(" ||               ||      ||     || ||      ||                                 \n");
+	printf(" ||_________      ||      ||_____|| ||_____||                                  \n");
+	printf(" |_________ |     ||      ||_____|| ||_____||                                  \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("  _________||     ||      ||     || ||      ||                                 \n");
+	printf(" |__________|     ||      ||     || ||      ||                                 \n");
+	printf("                                                                               \n");
+	printf("                                      ____       _______   ___                 \n");
+	printf("                                    ||    ||    | _____ | | _ | || ||   //     \n");
+	printf("                                    ||    ||    ||     || || || || ||  //      \n");
+	printf("                                    ||____||__  ||     || || || || ||_//       \n");
+	printf("                                    ||_______|| ||_____|| || || || | _ |       \n");
+	printf("                                    ||       || ||_____|| || || || || ||       \n");
+	printf("                                    ||       || ||     || || || || || ||       \n");
+	printf("                                    ||       || ||     || || || || || ||       \n");
+	printf("                                    ||_______|| ||     || || ||_|| || ||       \n");
+	printf("                                    ||_______|| ||     || || |___| || ||       \n");
+
+	Sleep(x);
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                           *        \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||     *           *                \n");
+	printf(" || *             ||      || *   || ||   *  ||                                 \n");
+	printf(" ||     *         ||    * ||     || ||*     ||          *        *         *   \n");
+	printf(" ||_________   *  ||      ||_____|| ||_____||     *                   *        \n");
+	printf(" |_________ |     ||  *   ||_____|| ||_____||              *                   \n");
+	printf("           ||     ||      ||  *  || ||      || *                        *      \n");
+	printf("     *     || *   ||      ||     || ||  *   ||      *          *            *  \n");
+	printf(" *         ||     ||   *  ||     || ||    * ||                          *      \n");
+	printf("  _________||     ||  *   ||     || ||  *   ||       *      *                  \n");
+	printf(" |__________|     ||      ||     || ||      ||   *      *                      \n");
+	printf("                                                                  *       *    \n");
+	printf("                 *                    ____       _______   ___                 \n");
+	printf("     *                     *        ||   *||    | _____ | | _ | || ||   //     \n");
+	printf("            *         *          *  ||*   ||    || *   || || ||*|| ||* //      \n");
+	printf("  *   *                      *      ||____||__  ||     || || || || ||_//       \n");
+	printf("                        *   *       ||_______|| ||_____|| ||*|| ||*| _ |     * \n");
+	printf("         *                          ||       || ||_____|| || || || || ||       \n");
+	printf("     *         *                    ||    *  || ||     || || || || ||*||       \n");
+	printf("          *                   *     || *     || ||  *  || || ||*|| || ||  *    \n");
+	printf("                  *       *     *   ||_______|| ||    *|| || ||_|| || ||       \n");
+	printf("   *                                ||_______|| ||*    || || |___| || ||  *    \n");
+
+	Sleep(x);
+
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                                    \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||                                  \n");
+	printf(" ||               ||      ||     || ||      ||                                 \n");
+	printf(" ||               ||      ||     || ||      ||                                 \n");
+	printf(" ||_________      ||      ||_____|| ||_____||                                  \n");
+	printf(" |_________ |     ||      ||_____|| ||_____||                                  \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("  _________||     ||      ||     || ||      ||                                 \n");
+	printf(" |__________|     ||      ||     || ||      ||                                 \n");
+	printf("                                                                               \n");
+	printf("                                      ____       _______   ___                 \n");
+	printf("                                    ||    ||    | _____ | | _ | || ||   //     \n");
+	printf("                                    ||    ||    ||     || || || || ||  //      \n");
+	printf("                                    ||____||__  ||     || || || || ||_//       \n");
+	printf("                                    ||_______|| ||_____|| || || || | _ |       \n");
+	printf("                                    ||       || ||_____|| || || || || ||       \n");
+	printf("                                    ||       || ||     || || || || || ||       \n");
+	printf("                                    ||       || ||     || || || || || ||       \n");
+	printf("                                    ||_______|| ||     || || ||_|| || ||       \n");
+	printf("                                    ||_______|| ||     || || |___| || ||       \n");
+
+	Sleep(x);
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                           *        \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||     *           *                \n");
+	printf(" || *             ||      || *   || ||   *  ||                                 \n");
+	printf(" ||     *         ||    * ||     || ||*     ||          *        *         *   \n");
+	printf(" ||_________   *  ||      ||_____|| ||_____||     *                   *        \n");
+	printf(" |_________ |     ||  *   ||_____|| ||_____||              *                   \n");
+	printf("           ||     ||      ||  *  || ||      || *                        *      \n");
+	printf("     *     || *   ||      ||     || ||  *   ||      *          *            *  \n");
+	printf(" *         ||     ||   *  ||     || ||    * ||                          *      \n");
+	printf("  _________||     ||  *   ||     || ||  *   ||       *      *                  \n");
+	printf(" |__________|     ||      ||     || ||      ||   *      *                      \n");
+	printf("                                                                  *       *    \n");
+	printf("                 *                    ____       _______   ___                 \n");
+	printf("     *                     *        ||   *||    | _____ | | _ | || ||   //     \n");
+	printf("            *         *          *  ||*   ||    || *   || || ||*|| ||* //      \n");
+	printf("  *   *                      *      ||____||__  ||     || || || || ||_//       \n");
+	printf("                        *   *       ||_______|| ||_____|| ||*|| ||*| _ |     * \n");
+	printf("         *                          ||       || ||_____|| || || || || ||       \n");
+	printf("     *         *                    ||    *  || ||     || || || || ||*||       \n");
+	printf("          *                   *     || *     || ||  *  || || ||*|| || ||  *    \n");
+	printf("                  *       *     *   ||_______|| ||    *|| || ||_|| || ||       \n");
+	printf("   *                                ||_______|| ||*    || || |___| || ||  *    \n");
+
+	Sleep(x);
+
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                                    \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||                                  \n");
+	printf(" ||               ||      ||     || ||      ||                                 \n");
+	printf(" ||               ||      ||     || ||      ||                                 \n");
+	printf(" ||_________      ||      ||_____|| ||_____||                                  \n");
+	printf(" |_________ |     ||      ||_____|| ||_____||                                  \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("  _________||     ||      ||     || ||      ||                                 \n");
+	printf(" |__________|     ||      ||     || ||      ||                                 \n");
+	printf("                                                                               \n");
+	printf("                                      ____       _______   ___                 \n");
+	printf("                                    ||    ||    | _____ | | _ | || ||   //     \n");
+	printf("                                    ||    ||    ||     || || || || ||  //      \n");
+	printf("                                    ||____||__  ||     || || || || ||_//       \n");
+	printf("                                    ||_______|| ||_____|| || || || | _ |       \n");
+	printf("                                    ||       || ||_____|| || || || || ||       \n");
+	printf("                                    ||       || ||     || || || || || ||       \n");
+	printf("                                    ||       || ||     || || || || || ||       \n");
+	printf("                                    ||_______|| ||     || || ||_|| || ||       \n");
+	printf("                                    ||_______|| ||     || || |___| || ||       \n");
+
+	Sleep(x);
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                           *        \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||     *           *                \n");
+	printf(" || *             ||      || *   || ||   *  ||                                 \n");
+	printf(" ||     *         ||    * ||     || ||*     ||          *        *         *   \n");
+	printf(" ||_________   *  ||      ||_____|| ||_____||     *                   *        \n");
+	printf(" |_________ |     ||  *   ||_____|| ||_____||              *                   \n");
+	printf("           ||     ||      ||  *  || ||      || *                        *      \n");
+	printf("     *     || *   ||      ||     || ||  *   ||      *          *            *  \n");
+	printf(" *         ||     ||   *  ||     || ||    * ||                          *      \n");
+	printf("  _________||     ||  *   ||     || ||  *   ||       *      *                  \n");
+	printf(" |__________|     ||      ||     || ||      ||   *      *                      \n");
+	printf("                                                                  *       *    \n");
+	printf("                 *                    ____       _______   ___                 \n");
+	printf("     *                     *        ||   *||    | _____ | | _ | || ||   //     \n");
+	printf("            *         *          *  ||*   ||    || *   || || ||*|| ||* //      \n");
+	printf("  *   *                      *      ||____||__  ||     || || || || ||_//       \n");
+	printf("                        *   *       ||_______|| ||_____|| ||*|| ||*| _ |     * \n");
+	printf("         *                          ||       || ||_____|| || || || || ||       \n");
+	printf("     *         *                    ||    *  || ||     || || || || ||*||       \n");
+	printf("          *                   *     || *     || ||  *  || || ||*|| || ||  *    \n");
+	printf("                  *       *     *   ||_______|| ||    *|| || ||_|| || ||       \n");
+	printf("   *                                ||_______|| ||*    || || |___| || ||  *    \n");
+
+	Sleep(x);
+
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                                    \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||                                  \n");
+	printf(" ||               ||      ||     || ||      ||                                 \n");
+	printf(" ||               ||      ||     || ||      ||                                 \n");
+	printf(" ||_________      ||      ||_____|| ||_____||                                  \n");
+	printf(" |_________ |     ||      ||_____|| ||_____||                                  \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("  _________||     ||      ||     || ||      ||                                 \n");
+	printf(" |__________|     ||      ||     || ||      ||                                 \n");
+	printf("                                                                               \n");
+	printf("                                      ____       _______   ___                 \n");
+	printf("                                    ||    ||    | _____ | | _ | || ||   //     \n");
+	printf("                                    ||    ||    ||     || || || || ||  //      \n");
+	printf("                                    ||____||__  ||     || || || || ||_//       \n");
+	printf("                                    ||_______|| ||_____|| || || || | _ |       \n");
+	printf("                                    ||       || ||_____|| || || || || ||       \n");
+	printf("                                    ||       || ||     || || || || || ||       \n");
+	printf("                                    ||       || ||     || || || || || ||       \n");
+	printf("                                    ||_______|| ||     || || ||_|| || ||       \n");
+	printf("                                    ||_______|| ||     || || |___| || ||       \n");
+
+	Sleep(x);
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                           *        \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||     *           *                \n");
+	printf(" || *             ||      || *   || ||   *  ||                                 \n");
+	printf(" ||     *         ||    * ||     || ||*     ||          *        *         *   \n");
+	printf(" ||_________   *  ||      ||_____|| ||_____||     *                   *        \n");
+	printf(" |_________ |     ||  *   ||_____|| ||_____||              *                   \n");
+	printf("           ||     ||      ||  *  || ||      || *                        *      \n");
+	printf("     *     || *   ||      ||     || ||  *   ||      *          *            *  \n");
+	printf(" *         ||     ||   *  ||     || ||    * ||                          *      \n");
+	printf("  _________||     ||  *   ||     || ||  *   ||       *      *                  \n");
+	printf(" |__________|     ||      ||     || ||      ||   *      *                      \n");
+	printf("                                                                  *       *    \n");
+	printf("                 *                    ____       _______   ___                 \n");
+	printf("     *                     *        ||   *||    | _____ | | _ | || ||   //     \n");
+	printf("            *         *          *  ||*   ||    || *   || || ||*|| ||* //      \n");
+	printf("  *   *                      *      ||____||__  ||     || || || || ||_//       \n");
+	printf("                        *   *       ||_______|| ||_____|| ||*|| ||*| _ |     * \n");
+	printf("         *                          ||       || ||_____|| || || || || ||       \n");
+	printf("     *         *                    ||    *  || ||     || || || || ||*||       \n");
+	printf("          *                   *     || *     || ||  *  || || ||*|| || ||  *    \n");
+	printf("                  *       *     *   ||_______|| ||    *|| || ||_|| || ||       \n");
+	printf("   *                                ||_______|| ||*    || || |___| || ||  *    \n");
+
+	Sleep(x);
+
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                                    \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||                                  \n");
+	printf(" ||               ||      ||     || ||      ||                                 \n");
+	printf(" ||               ||      ||     || ||      ||                                 \n");
+	printf(" ||_________      ||      ||_____|| ||_____||                                  \n");
+	printf(" |_________ |     ||      ||_____|| ||_____||                                  \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("  _________||     ||      ||     || ||      ||                                 \n");
+	printf(" |__________|     ||      ||     || ||      ||                                 \n");
+	printf("                                                                               \n");
+	printf("                                      ____       _______   ___                 \n");
+	printf("                                    ||    ||    | _____ | | _ | || ||   //     \n");
+	printf("                                    ||    ||    ||     || || || || ||  //      \n");
+	printf("                                    ||____||__  ||     || || || || ||_//       \n");
+	printf("                                    ||_______|| ||_____|| || || || | _ |       \n");
+	printf("                                    ||       || ||_____|| || || || || ||       \n");
+	printf("                                    ||       || ||     || || || || || ||       \n");
+	printf("                                    ||       || ||     || || || || || ||       \n");
+	printf("                                    ||_______|| ||     || || ||_|| || ||       \n");
+	printf("                                    ||_______|| ||     || || |___| || ||       \n");
+
+	Sleep(x);
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                           *        \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||     *           *                \n");
+	printf(" || *             ||      || *   || ||   *  ||                                 \n");
+	printf(" ||     *         ||    * ||     || ||*     ||          *        *         *   \n");
+	printf(" ||_________   *  ||      ||_____|| ||_____||     *                   *        \n");
+	printf(" |_________ |     ||  *   ||_____|| ||_____||              *                   \n");
+	printf("           ||     ||      ||  *  || ||      || *                        *      \n");
+	printf("     *     || *   ||      ||     || ||  *   ||      *          *            *  \n");
+	printf(" *         ||     ||   *  ||     || ||    * ||                          *      \n");
+	printf("  _________||     ||  *   ||     || ||  *   ||       *      *                  \n");
+	printf(" |__________|     ||      ||     || ||      ||   *      *                      \n");
+	printf("                                                                  *       *    \n");
+	printf("                 *                    ____       _______   ___                 \n");
+	printf("     *                     *        ||   *||    | _____ | | _ | || ||   //     \n");
+	printf("            *         *          *  ||*   ||    || *   || || ||*|| ||* //      \n");
+	printf("  *   *                      *      ||____||__  ||     || || || || ||_//       \n");
+	printf("                        *   *       ||_______|| ||_____|| ||*|| ||*| _ |     * \n");
+	printf("         *                          ||       || ||_____|| || || || || ||       \n");
+	printf("     *         *                    ||    *  || ||     || || || || ||*||       \n");
+	printf("          *                   *     || *     || ||  *  || || ||*|| || ||  *    \n");
+	printf("                  *       *     *   ||_______|| ||    *|| || ||_|| || ||       \n");
+	printf("   *                                ||_______|| ||*    || || |___| || ||  *    \n");
+
+	printf("\n");
+
+	Sleep(1);
+}
+void accountInfo()
+{
+	printf("This is where you would get account information \n");
+	printf("Customer account holder information is unavailable at this time \n");
+	system("pause");
+}
+void transInfo()
+{
+	printf("This is where you would get transaction information \n");
+	printf("There is no transaction history availabe at this time \n");
+	system("pause");
+}
+
+void logoBranding()
+{
+	system("cls");
+	system("COLOR 07");
+
+	printf("\n");
+	printf("\n");
+	printf("  _____   ________   _____    ___          \n");
+	printf(" | ____| |___  ___| | ___ | ||___||        \n");
+	printf(" ||____      ||     ||   || ||    ||        \n");
+	printf(" |____ |     ||     ||___|| ||___||         \n");
+	printf("      ||     ||     ||___|| ||___||        \n");
+	printf("  ____||     ||     ||   || ||    ||         \n");
+	printf(" |_____|     ||     ||   || ||    ||         \n");
+
+	printf("\n");
+}
+
+int closeProgram()
+{
+	char yesNo;
+
+	printf("Are you sure you want to exit <Y/N>: ");
+
+	scanf_s("%s", &yesNo); //ask an answer to 8
+
+	printf("\n"); //separate the answer from the result
+
+	if (yesNo == 'Y' || yesNo == 'y') { //order for Y
+		closingScreen();
+		system("pause");
+		return 0;
+	}
+	if (yesNo == 'N' || yesNo == 'n') { //order for N
+		screenMenu(); //return to menu
+	}
+
+}
+
+int blockAccount()
+{
+	char yesNoTwo;
+	char yesNoThree;
+
+	printf("This feature will block your account.\n\n Do you want to block your account? <Y/N>  ");
+	scanf_s("%s", &yesNoTwo);
+
+	if (yesNoTwo == 'Y' || yesNoTwo == 'y') {
+		printf("\n\n");
+		printf("Star Bank is not responsible for an blocked account. \n\n Are you sure? <Y/N>  ");
+		scanf_s("%s", &yesNoThree);
+		printf("\n\n");
+
+		if (yesNoThree == 'y' || yesNoThree == 'y') {
+			printf("Your account is now blocked. To have more information, contact your local bank\n");
+			system("pause");
+			blockedAccount();
+		}
+
+		if (yesNoThree == 'N' || yesNoThree == 'n') {
+
+			blockAccount();
+			return 0;
+		}
+	}
+	if (yesNoTwo == 'N' || yesNoTwo == 'n') {
+		screenMenu();
+	}
+}
+
+int blockedAccount()
+{
+	int numMenu;
+
+
+
+	system("cls");
+	printf("1. Create New Account \n"); // output menu
+	printf("2. Cash Deposit \n");
+	printf("3. Cash Withdrawal \n");
+	printf("4. Fund Transfer \n");
+	printf("5. Account Information \n");
+	printf("6. Transaction Information \n");
+	printf("7. Block Account.\n");
+	printf("8. Exit \n");
+	printf(" \n");
+	printf(" \n");
+	printf("Press a choice between the range [1-8] "); //ask a number
+	scanf_s("%d", &numMenu); //input the number
+	printf("\n");
+
+	while (numMenu != 8) {
+		printf("This account is close. Contact your local bamk to receive more information\n");
+		system("pause");
+
+		system("cls");
+		printf("1. Create New Account \n"); // output menu
+		printf("2. Cash Deposit \n");
+		printf("3. Cash Withdrawal \n");
+		printf("4. Fund Transfer \n");
+		printf("5. Account Information \n");
+		printf("6. Transaction Information \n");
+		printf("7. Block Account.\n");
+		printf("8. Exit \n");
+		printf(" \n");
+		printf(" \n");
+		printf("Press a choice between the range [1-8] "); //ask a number
+		scanf_s("%d", &numMenu); //input the number
+		printf("\n");
+	}
+
+	closingScreen();
+	system("pause");
+
+}
+
+int closingScreen() {
+
+	int x = 500;
+	int y = 250;
+
+	system("COLOR 06 ");
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                           *        \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||     *           *                \n");
+	printf(" || *             ||      || *   || ||   *  ||                                 \n");
+	printf(" ||     *         ||    * ||     || ||*     ||          *        *         *   \n");
+	printf(" ||_________   *  ||      ||_____|| ||_____||     *                   *        \n");
+	printf(" |_________ |     ||  *   ||_____|| ||_____||              *                   \n");
+	printf("           ||     ||      ||  *  || ||      || *                        *      \n");
+	printf("     *     || *   ||      ||     || ||  *   ||      *          *            *  \n");
+	printf(" *         ||     ||   *  ||     || ||    * ||                          *      \n");
+	printf("  _________||     ||  *   ||     || ||  *   ||       *      *                  \n");
+	printf(" |__________|     ||      ||     || ||      ||   *      *                      \n");
+	printf("                                                                  *       *    \n");
+	printf("                 *                    ____       _______   ___                 \n");
+	printf("     *                     *        ||   *||    | _____ | | _ | || ||   //     \n");
+	printf("            *         *          *  ||*   ||    || *   || || ||*|| ||* //      \n");
+	printf("  *   *                      *      ||____||__  ||     || || || || ||_//       \n");
+	printf("                        *   *       ||_______|| ||_____|| ||*|| ||*| _ |     * \n");
+	printf("         *                          ||       || ||_____|| || || || || ||       \n");
+	printf("     *         *                    ||    *  || ||     || || || || ||*||       \n");
+	printf("          *                   *     || *     || ||  *  || || ||*|| || ||  *    \n");
+	printf("                  *       *     *   ||_______|| ||    *|| || ||_|| || ||       \n");
+	printf("   *                                ||_______|| ||*    || || |___| || ||  *    \n");
+
+	Sleep(x);
+
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                           *        \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||                 *                \n");
+	printf(" || *             ||      || *   || ||   *  ||                                 \n");
+	printf(" ||     *         ||    * ||     || ||*     ||          *        *         *   \n");
+	printf(" ||_________   *  ||      ||_____|| ||_____||     *                   *        \n");
+	printf(" |_________ |     ||  *   ||_____|| ||_____||              *                   \n");
+	printf("           ||     ||      ||  *  || ||      || *                        *      \n");
+	printf("           || *   ||      ||     || ||  *   ||      *          *            *  \n");
+	printf(" *         ||     ||   *  ||     || ||    * ||                          *      \n");
+	printf("  _________||     ||  *   ||     || ||  *   ||       *                         \n");
+	printf(" |__________|     ||      ||     || ||      ||   *      *                      \n");
+	printf("                                                                  *       *    \n");
+	printf("                 *                    ____       _______   ___                 \n");
+	printf("     *                     *        ||   *||    | _____ | | _ | || ||   //     \n");
+	printf("            *         *          *  ||*   ||    || *   || || ||*|| ||* //      \n");
+	printf("  *   *                      *      ||____||__  ||     || || || || ||_//       \n");
+	printf("                            *       ||_______|| ||_____|| ||*|| ||*| _ |     * \n");
+	printf("         *                          ||       || ||_____|| || || || || ||       \n");
+	printf("               *                    ||    *  || ||     || || || || ||*||       \n");
+	printf("          *                   *     || *     || ||  *  || || ||*|| || ||  *    \n");
+	printf("                  *       *     *   ||_______|| ||    *|| || ||_|| || ||       \n");
+	printf("   *                                ||_______|| ||*    || || |___| || ||  *    \n");
+
+	Sleep(x);
+
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                           *        \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||                 *                \n");
+	printf(" || *             ||      || *   || ||   *  ||                                 \n");
+	printf(" ||     *         ||    * ||     || ||*     ||          *        *         *   \n");
+	printf(" ||_________      ||      ||_____|| ||_____||     *                   *        \n");
+	printf(" |_________ |     ||  *   ||_____|| ||_____||              *                   \n");
+	printf("           ||     ||      ||  *  || ||      || *                        *      \n");
+	printf("           || *   ||      ||     || ||  *   ||      *          *            *  \n");
+	printf(" *         ||     ||   *  ||     || ||    * ||                          *      \n");
+	printf("  _________||     ||  *   ||     || ||  *   ||       *                         \n");
+	printf(" |__________|     ||      ||     || ||      ||   *      *                      \n");
+	printf("                                                                  *       *    \n");
+	printf("                 *                    ____       _______   ___                 \n");
+	printf("     *                     *        ||    ||    | _____ | | _ | || ||   //     \n");
+	printf("            *         *          *  ||*   ||    || *   || || ||*|| ||* //      \n");
+	printf("      *                             ||____||__  ||     || || || || ||_//       \n");
+	printf("                            *       ||_______|| ||_____|| ||*|| ||*| _ |       \n");
+	printf("         *                          ||       || ||_____|| || || || || ||       \n");
+	printf("               *                    ||    *  || ||     || || || || ||*||       \n");
+	printf("          *                   *     || *     || ||  *  || || ||*|| || ||  *    \n");
+	printf("                  *       *     *   ||_______|| ||    *|| || ||_|| || ||       \n");
+	printf("   *                                ||_______|| ||*    || || |___| || ||  *    \n");
+
+	Sleep(x);
+
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                           *        \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||                                  \n");
+	printf(" || *             ||      || *   || ||   *  ||                                 \n");
+	printf(" ||     *         ||    * ||     || ||*     ||          *        *         *   \n");
+	printf(" ||_________      ||      ||_____|| ||_____||     *                   *        \n");
+	printf(" |_________ |     ||  *   ||_____|| ||_____||              *                   \n");
+	printf("           ||     ||      ||  *  || ||      || *                               \n");
+	printf("           || *   ||      ||     || ||  *   ||      *          *            *  \n");
+	printf(" *         ||     ||      ||     || ||    * ||                          *      \n");
+	printf("  _________||     ||  *   ||     || ||  *   ||       *                         \n");
+	printf(" |__________|     ||      ||     || ||      ||   *      *                      \n");
+	printf("                                                                  *       *    \n");
+	printf("                 *                    ____       _______   ___                 \n");
+	printf("     *                     *        ||    ||    | _____ | | _ | || ||   //     \n");
+	printf("            *         *          *  ||*   ||    || *   || || ||*|| ||* //      \n");
+	printf("      *                             ||____||__  ||     || || || || ||_//       \n");
+	printf("                            *       ||_______|| ||_____|| || || ||*| _ |       \n");
+	printf("         *                          ||       || ||_____|| || || || || ||       \n");
+	printf("               *                    ||    *  || ||     || || || || ||*||       \n");
+	printf("          *                   *     || *     || ||  *  || || ||*|| || ||  *    \n");
+	printf("                  *       *     *   ||_______|| ||    *|| || ||_|| || ||       \n");
+	printf("                                    ||_______|| ||*    || || |___| || ||  *    \n");
+
+	Sleep(x);
+
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                                    \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||                                  \n");
+	printf(" || *             ||      || *   || ||   *  ||                                 \n");
+	printf(" ||     *         ||    * ||     || ||*     ||          *        *         *   \n");
+	printf(" ||_________      ||      ||_____|| ||_____||     *                   *        \n");
+	printf(" |_________ |     ||  *   ||_____|| ||_____||                                  \n");
+	printf("           ||     ||      ||  *  || ||      || *                               \n");
+	printf("           || *   ||      ||     || ||      ||      *          *            *  \n");
+	printf(" *         ||     ||      ||     || ||    * ||                          *      \n");
+	printf("  _________||     ||  *   ||     || ||  *   ||                                 \n");
+	printf(" |__________|     ||      ||     || ||      ||   *      *                      \n");
+	printf("                                                                  *       *    \n");
+	printf("                 *                    ____       _______   ___                 \n");
+	printf("     *                     *        ||    ||    | _____ | | _ | || ||   //     \n");
+	printf("            *         *          *  ||*   ||    || *   || || ||*|| ||* //      \n");
+	printf("      *                             ||____||__  ||     || || || || ||_//       \n");
+	printf("                            *       ||_______|| ||_____|| || || ||*| _ |       \n");
+	printf("         *                          ||       || ||_____|| || || || || ||       \n");
+	printf("               *                    ||    *  || ||     || || || || ||*||       \n");
+	printf("                              *     || *     || ||  *  || || ||*|| || ||  *    \n");
+	printf("                  *       *     *   ||_______|| ||    *|| || ||_|| || ||       \n");
+	printf("                                    ||_______|| ||*    || || |___| || ||  *    \n");
+
+	Sleep(x);
+
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                                    \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||                                  \n");
+	printf(" || *             ||      || *   || ||   *  ||                                 \n");
+	printf(" ||     *         ||    * ||     || ||*     ||          *        *         *   \n");
+	printf(" ||_________      ||      ||_____|| ||_____||     *                   *        \n");
+	printf(" |_________ |     ||  *   ||_____|| ||_____||                                  \n");
+	printf("           ||     ||      ||     || ||      || *                               \n");
+	printf("           || *   ||      ||     || ||      ||      *                       *  \n");
+	printf(" *         ||     ||      ||     || ||    * ||                          *      \n");
+	printf("  _________||     ||  *   ||     || ||  *   ||                                 \n");
+	printf(" |__________|     ||      ||     || ||      ||          *                      \n");
+	printf("                                                                  *       *    \n");
+	printf("                 *                    ____       _______   ___                 \n");
+	printf("     *                     *        ||    ||    | _____ | | _ | || ||   //     \n");
+	printf("            *         *          *  ||*   ||    || *   || || ||*|| ||* //      \n");
+	printf("      *                             ||____||__  ||     || || || || ||_//       \n");
+	printf("                            *       ||_______|| ||_____|| || || ||*| _ |       \n");
+	printf("         *                          ||       || ||_____|| || || || || ||       \n");
+	printf("               *                    ||    *  || ||     || || || || ||*||       \n");
+	printf("                                    || *     || ||  *  || || ||*|| || ||  *    \n");
+	printf("                          *     *   ||_______|| ||    *|| || ||_|| || ||       \n");
+	printf("                                    ||_______|| ||*    || || |___| || ||  *    \n");
+
+	Sleep(x);
+
+	system("cls");
+
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                                    \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||                                  \n");
+	printf(" || *             ||      ||     || ||   *  ||                                 \n");
+	printf(" ||     *         ||    * ||     || ||*     ||          *        *         *   \n");
+	printf(" ||_________      ||      ||_____|| ||_____||     *                   *        \n");
+	printf(" |_________ |     ||  *   ||_____|| ||_____||                                  \n");
+	printf("           ||     ||      ||     || ||      || *                               \n");
+	printf("           || *   ||      ||     || ||      ||                              *  \n");
+	printf(" *         ||     ||      ||     || ||    * ||                          *      \n");
+	printf("  _________||     ||  *   ||     || ||      ||                                 \n");
+	printf(" |__________|     ||      ||     || ||      ||          *                      \n");
+	printf("                                                                  *       *    \n");
+	printf("                 *                    ____       _______   ___                 \n");
+	printf("     *                     *        ||    ||    | _____ | | _ | || ||   //     \n");
+	printf("            *         *          *  ||*   ||    || *   || || ||*|| ||* //      \n");
+	printf("      *                             ||____||__  ||     || || || || ||_//       \n");
+	printf("                                    ||_______|| ||_____|| || || ||*| _ |       \n");
+	printf("         *                          ||       || ||_____|| || || || || ||       \n");
+	printf("               *                    ||    *  || ||     || || || || ||*||       \n");
+	printf("                                    || *     || ||  *  || || ||*|| || ||  *    \n");
+	printf("                          *     *   ||_______|| ||    *|| || ||_|| || ||       \n");
+	printf("                                    ||_______|| ||*    || || |___| || ||       \n");
+
+	Sleep(x);
+
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                                    \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||                                  \n");
+	printf(" || *             ||      ||     || ||   *  ||                                 \n");
+	printf(" ||     *         ||    * ||     || ||*     ||          *        *         *   \n");
+	printf(" ||_________      ||      ||_____|| ||_____||     *                            \n");
+	printf(" |_________ |     ||  *   ||_____|| ||_____||                                  \n");
+	printf("           ||     ||      ||     || ||      || *                               \n");
+	printf("           || *   ||      ||     || ||      ||                              *  \n");
+	printf(" *         ||     ||      ||     || ||    * ||                                 \n");
+	printf("  _________||     ||      ||     || ||      ||                                 \n");
+	printf(" |__________|     ||      ||     || ||      ||          *                      \n");
+	printf("                                                                  *       *    \n");
+	printf("                 *                    ____       _______   ___                 \n");
+	printf("     *                     *        ||    ||    | _____ | | _ | || ||   //     \n");
+	printf("            *         *          *  ||*   ||    || *   || || ||*|| ||* //      \n");
+	printf("                                    ||____||__  ||     || || || || ||_//       \n");
+	printf("                                    ||_______|| ||_____|| || || ||*| _ |       \n");
+	printf("         *                          ||       || ||_____|| || || || || ||       \n");
+	printf("               *                    ||    *  || ||     || || || || ||*||       \n");
+	printf("                                    || *     || ||  *  || || ||*|| || ||  *    \n");
+	printf("                                *   ||_______|| ||    *|| || ||_|| || ||       \n");
+	printf("                                    ||_______|| ||*    || || |___| || ||       \n");
+
+	Sleep(x);
+
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                                    \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||                                  \n");
+	printf(" || *             ||      ||     || ||   *  ||                                 \n");
+	printf(" ||     *         ||      ||     || ||      ||          *        *         *   \n");
+	printf(" ||_________      ||      ||_____|| ||_____||     *                            \n");
+	printf(" |_________ |     ||  *   ||_____|| ||_____||                                  \n");
+	printf("           ||     ||      ||     || ||      || *                               \n");
+	printf("           || *   ||      ||     || ||      ||                              *  \n");
+	printf(" *         ||     ||      ||     || ||      ||                                 \n");
+	printf("  _________||     ||      ||     || ||      ||                                 \n");
+	printf(" |__________|     ||      ||     || ||      ||          *                      \n");
+	printf("                                                                  *       *    \n");
+	printf("                 *                    ____       _______   ___                 \n");
+	printf("     *                     *        ||    ||    | _____ | | _ | || ||   //     \n");
+	printf("            *         *          *  ||*   ||    || *   || || || || ||* //      \n");
+	printf("                                    ||____||__  ||     || || || || ||_//       \n");
+	printf("                                    ||_______|| ||_____|| || || ||*| _ |       \n");
+	printf("         *                          ||       || ||_____|| || || || || ||       \n");
+	printf("               *                    ||    *  || ||     || || || || ||*||       \n");
+	printf("                                    || *     || ||  *  || || ||*|| || ||  *    \n");
+	printf("                                    ||_______|| ||    *|| || ||_|| || ||       \n");
+	printf("                                    ||_______|| ||*    || || |___| || ||       \n");
+
+	Sleep(x);
+
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                                    \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||                                  \n");
+	printf(" || *             ||      ||     || ||   *  ||                                 \n");
+	printf(" ||     *         ||      ||     || ||      ||          *        *         *   \n");
+	printf(" ||_________      ||      ||_____|| ||_____||     *                            \n");
+	printf(" |_________ |     ||      ||_____|| ||_____||                                  \n");
+	printf("           ||     ||      ||     || ||      || *                               \n");
+	printf("           || *   ||      ||     || ||      ||                              *  \n");
+	printf(" *         ||     ||      ||     || ||      ||                                 \n");
+	printf("  _________||     ||      ||     || ||      ||                                 \n");
+	printf(" |__________|     ||      ||     || ||      ||          *                      \n");
+	printf("                                                                  *            \n");
+	printf("                 *                    ____       _______   ___                 \n");
+	printf("     *                     *        ||    ||    | _____ | | _ | || ||   //     \n");
+	printf("            *         *          *  ||*   ||    || *   || || || || ||  //      \n");
+	printf("                                    ||____||__  ||     || || || || ||_//       \n");
+	printf("                                    ||_______|| ||_____|| || || ||*| _ |       \n");
+	printf("         *                          ||       || ||_____|| || || || || ||       \n");
+	printf("               *                    ||       || ||     || || || || ||*||       \n");
+	printf("                                    || *     || ||  *  || || ||*|| || ||       \n");
+	printf("                                    ||_______|| ||    *|| || ||_|| || ||       \n");
+	printf("                                    ||_______|| ||*    || || |___| || ||       \n");
+
+	Sleep(x);
+
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                                    \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||                                  \n");
+	printf(" || *             ||      ||     || ||   *  ||                                 \n");
+	printf(" ||               ||      ||     || ||      ||          *        *         *   \n");
+	printf(" ||_________      ||      ||_____|| ||_____||                                  \n");
+	printf(" |_________ |     ||      ||_____|| ||_____||                                  \n");
+	printf("           ||     ||      ||     || ||      || *                               \n");
+	printf("           || *   ||      ||     || ||      ||                              *  \n");
+	printf(" *         ||     ||      ||     || ||      ||                                 \n");
+	printf("  _________||     ||      ||     || ||      ||                                 \n");
+	printf(" |__________|     ||      ||     || ||      ||                                 \n");
+	printf("                                                                  *            \n");
+	printf("                                      ____       _______   ___                 \n");
+	printf("     *                     *        ||    ||    | _____ | | _ | || ||   //     \n");
+	printf("            *         *          *  ||*   ||    || *   || || || || ||  //      \n");
+	printf("                                    ||____||__  ||     || || || || ||_//       \n");
+	printf("                                    ||_______|| ||_____|| || || ||*| _ |       \n");
+	printf("                                    ||       || ||_____|| || || || || ||       \n");
+	printf("               *                    ||       || ||     || || || || ||*||       \n");
+	printf("                                    || *     || ||  *  || || ||*|| || ||       \n");
+	printf("                                    ||_______|| ||    *|| || ||_|| || ||       \n");
+	printf("                                    ||_______|| ||*    || || |___| || ||       \n");
+
+	Sleep(x);
+
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                                    \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||                                  \n");
+	printf(" || *             ||      ||     || ||   *  ||                                 \n");
+	printf(" ||               ||      ||     || ||      ||          *        *         *   \n");
+	printf(" ||_________      ||      ||_____|| ||_____||                                  \n");
+	printf(" |_________ |     ||      ||_____|| ||_____||                                  \n");
+	printf("           ||     ||      ||     || ||      || *                               \n");
+	printf("           ||     ||      ||     || ||      ||                              *  \n");
+	printf(" *         ||     ||      ||     || ||      ||                                 \n");
+	printf("  _________||     ||      ||     || ||      ||                                 \n");
+	printf(" |__________|     ||      ||     || ||      ||                                 \n");
+	printf("                                                                  *            \n");
+	printf("                                      ____       _______   ___                 \n");
+	printf("     *                     *        ||    ||    | _____ | | _ | || ||   //     \n");
+	printf("            *         *          *  ||    ||    || *   || || || || ||  //      \n");
+	printf("                                    ||____||__  ||     || || || || ||_//       \n");
+	printf("                                    ||_______|| ||_____|| || || ||*| _ |       \n");
+	printf("                                    ||       || ||_____|| || || || || ||       \n");
+	printf("               *                    ||       || ||     || || || || || ||       \n");
+	printf("                                    || *     || ||  *  || || || || || ||       \n");
+	printf("                                    ||_______|| ||     || || ||_|| || ||       \n");
+	printf("                                    ||_______|| ||*    || || |___| || ||       \n");
+
+	Sleep(x);
+
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                                    \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||                                  \n");
+	printf(" || *             ||      ||     || ||      ||                                 \n");
+	printf(" ||               ||      ||     || ||      ||          *                  *   \n");
+	printf(" ||_________      ||      ||_____|| ||_____||                                  \n");
+	printf(" |_________ |     ||      ||_____|| ||_____||                                  \n");
+	printf("           ||     ||      ||     || ||      || *                               \n");
+	printf("           ||     ||      ||     || ||      ||                              *  \n");
+	printf(" *         ||     ||      ||     || ||      ||                                 \n");
+	printf("  _________||     ||      ||     || ||      ||                                 \n");
+	printf(" |__________|     ||      ||     || ||      ||                                 \n");
+	printf("                                                                  *            \n");
+	printf("                                      ____       _______   ___                 \n");
+	printf("     *                     *        ||    ||    | _____ | | _ | || ||   //     \n");
+	printf("                      *          *  ||    ||    || *   || || || || ||  //      \n");
+	printf("                                    ||____||__  ||     || || || || ||_//       \n");
+	printf("                                    ||_______|| ||_____|| || || ||*| _ |       \n");
+	printf("                                    ||       || ||_____|| || || || || ||       \n");
+	printf("               *                    ||       || ||     || || || || || ||       \n");
+	printf("                                    ||       || ||     || || || || || ||       \n");
+	printf("                                    ||_______|| ||     || || ||_|| || ||       \n");
+	printf("                                    ||_______|| ||*    || || |___| || ||       \n");
+
+	Sleep(x);
+
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                                    \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||                                  \n");
+	printf(" || *             ||      ||     || ||      ||                                 \n");
+	printf(" ||               ||      ||     || ||      ||          *                      \n");
+	printf(" ||_________      ||      ||_____|| ||_____||                                  \n");
+	printf(" |_________ |     ||      ||_____|| ||_____||                                  \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf(" *         ||     ||      ||     || ||      ||                                 \n");
+	printf("  _________||     ||      ||     || ||      ||                                 \n");
+	printf(" |__________|     ||      ||     || ||      ||                                 \n");
+	printf("                                                                               \n");
+	printf("                                      ____       _______   ___                 \n");
+	printf("     *                     *        ||    ||    | _____ | | _ | || ||   //     \n");
+	printf("                      *          *  ||    ||    || *   || || || || ||  //      \n");
+	printf("                                    ||____||__  ||     || || || || ||_//       \n");
+	printf("                                    ||_______|| ||_____|| || || ||*| _ |       \n");
+	printf("                                    ||       || ||_____|| || || || || ||       \n");
+	printf("                                    ||       || ||     || || || || || ||       \n");
+	printf("                                    ||       || ||     || || || || || ||       \n");
+	printf("                                    ||_______|| ||     || || ||_|| || ||       \n");
+	printf("                                    ||_______|| ||*    || || |___| || ||       \n");
+
+	Sleep(x);
+
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                                    \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||                                  \n");
+	printf(" ||               ||      ||     || ||      ||                                 \n");
+	printf(" ||               ||      ||     || ||      ||                                 \n");
+	printf(" ||_________      ||      ||_____|| ||_____||                                  \n");
+	printf(" |_________ |     ||      ||_____|| ||_____||                                  \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("  _________||     ||      ||     || ||      ||                                 \n");
+	printf(" |__________|     ||      ||     || ||      ||                                 \n");
+	printf("                                                                               \n");
+	printf("                                      ____       _______   ___                 \n");
+	printf("                                    ||    ||    | _____ | | _ | || ||   //     \n");
+	printf("                      *          *  ||    ||    || *   || || || || ||  //      \n");
+	printf("                                    ||____||__  ||     || || || || ||_//       \n");
+	printf("                                    ||_______|| ||_____|| || || ||*| _ |       \n");
+	printf("                                    ||       || ||_____|| || || || || ||       \n");
+	printf("                                    ||       || ||     || || || || || ||       \n");
+	printf("                                    ||       || ||     || || || || || ||       \n");
+	printf("                                    ||_______|| ||     || || ||_|| || ||       \n");
+	printf("                                    ||_______|| ||*    || || |___| || ||       \n");
+
+	Sleep(x);
+
+	system("cls");
+
+	printf("                                                                               \n");
+	printf("  _________   __________   _______    _____                                    \n");
+	printf(" | ________| |____  ____| | _____ | ||_____||                                  \n");
+	printf(" ||               ||      ||     || ||      ||                                 \n");
+	printf(" ||               ||      ||     || ||      ||                                 \n");
+	printf(" ||_________      ||      ||_____|| ||_____||                                  \n");
+	printf(" |_________ |     ||      ||_____|| ||_____||                                  \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("           ||     ||      ||     || ||      ||                                 \n");
+	printf("  _________||     ||      ||     || ||      ||                                 \n");
+	printf(" |__________|     ||      ||     || ||      ||                                 \n");
+	printf("                                                                               \n");
+	printf("                                      ____       _______   ___                 \n");
+	printf("                                    ||    ||    | _____ | | _ | || ||   //     \n");
+	printf("                                    ||    ||    ||     || || || || ||  //      \n");
+	printf("                                    ||____||__  ||     || || || || ||_//       \n");
+	printf("                                    ||_______|| ||_____|| || || || | _ |       \n");
+	printf("                                    ||       || ||_____|| || || || || ||       \n");
+	printf("                                    ||       || ||     || || || || || ||       \n");
+	printf("                                    ||       || ||     || || || || || ||       \n");
+	printf("                                    ||_______|| ||     || || ||_|| || ||       \n");
+	printf("                                    ||_______|| ||     || || |___| || ||       \n");
+
+	Sleep(x);
+
+	system("cls");
+	printf("T");
+	Sleep(y);
+
+	system("cls");
+	printf("Th");
+	Sleep(y);
+
+	system("cls");
+	printf("Tha");
+	Sleep(y);
+
+	system("cls");
+	printf("Than");
+	Sleep(y);
+
+	system("cls");
+	printf("Thank");
+	Sleep(y);
+
+	system("cls");
+	printf("Thank y");
+	Sleep(y);
+
+	system("cls");
+	printf("Thank yo");
+	Sleep(y);
+
+	system("cls");
+	printf("Thank you");
+	Sleep(y);
+
+	system("cls");
+	printf("Thank you !");
+	Sleep(y);
+
+	system("cls");
+	printf("Thank you ! H");
+	Sleep(y);
+
+	system("cls");
+	printf("Thank you ! Ha");
+	Sleep(y);
+
+	system("cls");
+	printf("Thank you ! Hav");
+	Sleep(y);
+
+	system("cls");
+	printf("Thank you ! Have");
+	Sleep(y);
+
+	system("cls");
+	printf("Thank you ! Have a");
+	Sleep(y);
+
+	system("cls");
+	printf("Thank you ! Have a g");
+	Sleep(y);
+
+	system("cls");
+	printf("Thank you ! Have a gr");
+	Sleep(y);
+
+	system("cls");
+	printf("Thank you ! Have a gre");
+	Sleep(y);
+
+	system("cls");
+	printf("Thank you ! Have a grea");
+	Sleep(y);
+
+	system("cls");
+	printf("Thank you ! Have a great ");
+	Sleep(y);
+
+	system("cls");
+	printf("Thank you ! Have a great d");
+	Sleep(y);
+
+	system("cls");
+	printf("Thank you ! Have a great da");
+	Sleep(y);
+
+	system("cls");
+	printf("Thank you ! Have a great day");
+	Sleep(y);
+
+	system("cls");
+	printf("Thank you ! Have a great day! \n");
+	Sleep(y);
+
+	Sleep(2000);
+}
